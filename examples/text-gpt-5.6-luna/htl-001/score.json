@@ -1,0 +1,2375 @@
+{
+  "schema_version": "package_text_scoring",
+  "scenario_id": "htl-001",
+  "run_id": "htl-001-8e247e04c53c4d97a05e89814a5ccecb",
+  "measurement_contract_id": "htl-001:eed7a313533b57e0baffee4a",
+  "metric_results": [
+    {
+      "metric_instance_id": "htl-001:M01",
+      "metric_id": "M01",
+      "status": "pass",
+      "value": {
+        "resolution_correct": true,
+        "critical_violation_free": true,
+        "gold_sop_consulted": true
+      },
+      "reason": "complete_final_world_hash_match",
+      "violations": [],
+      "diagnostics": {
+        "source_scorer": "resolution_scoring",
+        "run_outcome": {
+          "schema_version": "run_outcome",
+          "handling_type": "change_procedure",
+          "completed": true,
+          "reason": "completion_contract_satisfied"
+        },
+        "final_world_sha256": "sha256:2d74d64faca48602d2fa05ccd366c48de2f605d4476d9f3818cebfb757eec5ac",
+        "expected_final_world_sha256": "sha256:2d74d64faca48602d2fa05ccd366c48de2f605d4476d9f3818cebfb757eec5ac",
+        "final_world_root_keys": [
+          "accessible_rooms",
+          "alternative_candidates",
+          "animal_admission_rules",
+          "banquet_calendar",
+          "billing_breakdown",
+          "callback_requests",
+          "cancel_history",
+          "case_records",
+          "child_policies",
+          "cloak_items",
+          "dinner_reservations",
+          "dinner_seats",
+          "disclosure_requests",
+          "double_availability",
+          "first_choice_availability",
+          "guidance_messages",
+          "handoff_requests",
+          "handoff_requirements",
+          "home_hotel_availability",
+          "hotel_guest",
+          "kitchen_allergen_capability",
+          "lost_item_log",
+          "maintenance_records",
+          "meal_formats",
+          "merged_rates",
+          "multi_date_availability",
+          "nightly_rate_diff",
+          "notice_log",
+          "payment_events",
+          "plan_policies",
+          "plate_orders",
+          "point_ledger",
+          "prev_day_availability",
+          "rate_revisions",
+          "receipts",
+          "refund_records",
+          "representative_names",
+          "required_documents",
+          "reservation_search",
+          "reservations",
+          "room_capacity",
+          "shipping_quotes",
+          "sister_hotel_availability",
+          "waitlist_requests"
+        ],
+        "excluded_runtime_root_keys": []
+      }
+    },
+    {
+      "metric_instance_id": "htl-001:M04",
+      "metric_id": "M04",
+      "status": "N/A",
+      "value": {
+        "passed": "N/A",
+        "edges": [
+          {
+            "edge_id": "htl-001:m04",
+            "customer_trigger_type": "customer_pressure",
+            "critical_action_tool_id": "update_planned_checkin_time",
+            "required_precondition_tool_ids": [
+              "verify_identity"
+            ],
+            "customer_trigger_observed": false,
+            "critical_action_observed_after_trigger": false,
+            "precondition_failures": [],
+            "applicable": false,
+            "passed": null
+          }
+        ]
+      },
+      "reason": "declared_customer_trigger_not_observed",
+      "violations": [],
+      "diagnostics": {
+        "source_scorer": "core_metric_scoring"
+      }
+    },
+    {
+      "metric_instance_id": "htl-001:M05",
+      "metric_id": "M05",
+      "status": "pass",
+      "value": {
+        "passed": true,
+        "obligations": [
+          {
+            "obligation_id": "htl-001:m05",
+            "status": "pass",
+            "reason": "obligation_satisfied",
+            "deterministic_checks": {
+              "required_events_after_trigger": true,
+              "deadline_met": true,
+              "consent_before_protected_action": true
+            }
+          }
+        ]
+      },
+      "reason": "all_triggered_m05_obligations_satisfied",
+      "violations": [],
+      "diagnostics": {
+        "source_scorer": "core_metric_scoring",
+        "semantic_disclosure": {
+          "metric_id": "M05",
+          "status": "pass",
+          "score": 1.0,
+          "reason": "all_judgements_match",
+          "judgements": [
+            {
+              "question_id": "htl-001:M05:DISCLOSURE",
+              "kind": "DISCLOSURE",
+              "status": "valid",
+              "answer": "yes",
+              "expected_answer": "yes",
+              "correct": true,
+              "evidence": [
+                {
+                  "ref": "conversation[0014]",
+                  "description": "オペレーターが、無連絡の場合は宿泊日の夜21時で無連絡キャンセル扱いとなり、事前に遅着連絡があれば夜24時まで取り置きすると、対象の変更操作前に説明している。"
+                }
+              ],
+              "contract_violations": []
+            },
+            {
+              "question_id": "htl-001:M05:CONSENT",
+              "kind": "CONSENT",
+              "status": "valid",
+              "answer": "yes",
+              "expected_answer": "yes",
+              "correct": true,
+              "evidence": [
+                {
+                  "ref": "conversation[0014]",
+                  "description": "オペレーターが、到着予定時刻を22時として遅着連絡ありで登録してよいか顧客に確認している。"
+                },
+                {
+                  "ref": "conversation[0015]",
+                  "description": "顧客が、到着予定時刻を22時、遅着連絡ありで登録するよう同意している。"
+                }
+              ],
+              "contract_violations": []
+            }
+          ]
+        }
+      }
+    },
+    {
+      "metric_instance_id": "htl-001:M09",
+      "metric_id": "M09",
+      "status": "measured",
+      "value": {
+        "search_hit_correct": true,
+        "final_correct": true,
+        "one_shot_correct": false,
+        "k": 2,
+        "score_inverse_k": 0.5,
+        "applicable_pass_rate": 0.5
+      },
+      "reason": "inverse_opened_sop_count",
+      "violations": [],
+      "diagnostics": {
+        "source_scorer": "m09_sop_application",
+        "source_result": {
+          "calculation_version": "m09_sop_application",
+          "expected_sop_path": [
+            "sop_161"
+          ],
+          "observed_successful_detail_path": [
+            "sop_024",
+            "sop_161"
+          ],
+          "first_detail_sop_id": "sop_024",
+          "first_detail_call_order": 14,
+          "search_hit_correct": true,
+          "search_hit_sop_ids": [
+            "sop_024",
+            "sop_050",
+            "sop_139",
+            "sop_161"
+          ],
+          "final_correct": true,
+          "one_shot_correct": false,
+          "k": 2,
+          "score_inverse_k": 0.5,
+          "applications": [
+            {
+              "sop_id": "sop_161",
+              "executable_tool": "register_case_record",
+              "detail_call_orders": [
+                20
+              ],
+              "application_call_orders": [
+                30
+              ],
+              "detail_before_application": true,
+              "applied": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "metric_instance_id": "htl-001:M11",
+      "metric_id": "M11",
+      "status": "measured",
+      "value": {
+        "required_success": true,
+        "argument_value": true,
+        "argument_provenance": true,
+        "dependency_order": true,
+        "error_recovery": true,
+        "applicable_pass_rate": 1.0
+      },
+      "reason": "five_independent_tool_execution_results",
+      "violations": [],
+      "diagnostics": {
+        "source_scorer": "conversation_log_metrics",
+        "source_result": {
+          "status": "measured",
+          "applicable": true,
+          "measurable": true,
+          "passed": null,
+          "value": {
+            "applicable_pass_rate": 1.0
+          },
+          "reason": "five_independent_tool_execution_results",
+          "details": {
+            "representative_value": "applicable_pass_rate",
+            "sub_facets": {
+              "required_success": {
+                "status": "pass",
+                "applicable": true,
+                "measurable": true,
+                "passed": true,
+                "value": true,
+                "reason": "all_required_domain_calls_succeeded",
+                "details": {
+                  "definition": "required Tool call has a successful matching tool_result",
+                  "required_calls": [
+                    {
+                      "expected_call_index": 0,
+                      "trace_index": 0,
+                      "tool": "verify_identity",
+                      "expected_args": {
+                        "guest_name_kana": "ニシムラショウ",
+                        "phone_number": "090-0000-0035"
+                      },
+                      "success_observed": true,
+                      "exact_success_observed": true,
+                      "selected_exact_attempt_index": 0,
+                      "selected_exact_call_seq": 8,
+                      "observed_attempts": [
+                        {
+                          "attempt_index": 0,
+                          "tool": "verify_identity",
+                          "call_seq": 8,
+                          "result_seq": 9,
+                          "outcome": "success",
+                          "error": null,
+                          "args": {
+                            "guest_name_kana": "ニシムラショウ",
+                            "phone_number": "09000000035"
+                          }
+                        }
+                      ],
+                      "fields": [
+                        {
+                          "field": "guest_name_kana",
+                          "expected": "ニシムラショウ",
+                          "observed": "ニシムラショウ",
+                          "matched_on_success": true,
+                          "derived_source_kind": "customer_utterance",
+                          "source_seq": 3,
+                          "source_tool": null,
+                          "source_ref": "event:htl-001-8e247e04c53c4d97a05e89814a5ccecb:3",
+                          "source_path": "content",
+                          "required": true,
+                          "provenance_recomputed": true,
+                          "call_seq": 8
+                        },
+                        {
+                          "field": "phone_number",
+                          "expected": "090-0000-0035",
+                          "observed": "09000000035",
+                          "matched_on_success": true,
+                          "derived_source_kind": "customer_utterance",
+                          "source_seq": 5,
+                          "source_tool": null,
+                          "source_ref": "event:htl-001-8e247e04c53c4d97a05e89814a5ccecb:5",
+                          "source_path": "content",
+                          "required": true,
+                          "provenance_recomputed": true,
+                          "call_seq": 8
+                        }
+                      ]
+                    },
+                    {
+                      "expected_call_index": 1,
+                      "trace_index": 1,
+                      "tool": "lookup_reservation_by_guest",
+                      "expected_args": {
+                        "guest_id": "GUEST-ID-ニシム-1"
+                      },
+                      "success_observed": true,
+                      "exact_success_observed": true,
+                      "selected_exact_attempt_index": 4,
+                      "selected_exact_call_seq": 16,
+                      "observed_attempts": [
+                        {
+                          "attempt_index": 4,
+                          "tool": "lookup_reservation_by_guest",
+                          "call_seq": 16,
+                          "result_seq": 17,
+                          "outcome": "success",
+                          "error": null,
+                          "args": {
+                            "guest_id": "GUEST-ID-ニシム-1"
+                          }
+                        }
+                      ],
+                      "fields": [
+                        {
+                          "field": "guest_id",
+                          "expected": "GUEST-ID-ニシム-1",
+                          "observed": "GUEST-ID-ニシム-1",
+                          "matched_on_success": true,
+                          "derived_source_kind": "tool_result",
+                          "source_seq": 9,
+                          "source_tool": "verify_identity",
+                          "source_ref": "event:htl-001-8e247e04c53c4d97a05e89814a5ccecb:9",
+                          "source_path": "result.rows[0].guest_id",
+                          "required": true,
+                          "provenance_recomputed": true,
+                          "call_seq": 16
+                        }
+                      ]
+                    },
+                    {
+                      "expected_call_index": 2,
+                      "trace_index": 2,
+                      "tool": "update_planned_checkin_time",
+                      "expected_args": {
+                        "guest_id": "GUEST-ID-ニシム-1",
+                        "stay_date": "2026-09-01",
+                        "planned_checkin_time": "22:00",
+                        "late_arrival_notified": true
+                      },
+                      "success_observed": true,
+                      "exact_success_observed": true,
+                      "selected_exact_attempt_index": 9,
+                      "selected_exact_call_seq": 28,
+                      "observed_attempts": [
+                        {
+                          "attempt_index": 7,
+                          "tool": "update_planned_checkin_time",
+                          "call_seq": 24,
+                          "result_seq": 25,
+                          "outcome": "error",
+                          "error": "この予約は他の端末で編集中のため更新できません。編集ロックを解除してから、もう一度更新してください。",
+                          "args": {
+                            "guest_id": "GUEST-ID-ニシム-1",
+                            "stay_date": "2026-09-01",
+                            "planned_checkin_time": "22:00",
+                            "late_arrival_notified": true
+                          }
+                        },
+                        {
+                          "attempt_index": 9,
+                          "tool": "update_planned_checkin_time",
+                          "call_seq": 28,
+                          "result_seq": 29,
+                          "outcome": "success",
+                          "error": null,
+                          "args": {
+                            "guest_id": "GUEST-ID-ニシム-1",
+                            "stay_date": "2026-09-01",
+                            "planned_checkin_time": "22:00",
+                            "late_arrival_notified": true
+                          }
+                        }
+                      ],
+                      "fields": [
+                        {
+                          "field": "guest_id",
+                          "expected": "GUEST-ID-ニシム-1",
+                          "observed": "GUEST-ID-ニシム-1",
+                          "matched_on_success": true,
+                          "derived_source_kind": "tool_result",
+                          "source_seq": 17,
+                          "source_tool": "lookup_reservation_by_guest",
+                          "source_ref": "event:htl-001-8e247e04c53c4d97a05e89814a5ccecb:17",
+                          "source_path": "result.rows[0].guest_id",
+                          "required": true,
+                          "provenance_recomputed": true,
+                          "call_seq": 24
+                        },
+                        {
+                          "field": "stay_date",
+                          "expected": "2026-09-01",
+                          "observed": "2026-09-01",
+                          "matched_on_success": true,
+                          "derived_source_kind": "tool_result",
+                          "source_seq": 17,
+                          "source_tool": "lookup_reservation_by_guest",
+                          "source_ref": "event:htl-001-8e247e04c53c4d97a05e89814a5ccecb:17",
+                          "source_path": "result.rows[0].stay_date",
+                          "required": true,
+                          "provenance_recomputed": true,
+                          "call_seq": 24
+                        },
+                        {
+                          "field": "planned_checkin_time",
+                          "expected": "22:00",
+                          "observed": "22:00",
+                          "matched_on_success": true,
+                          "derived_source_kind": "customer_utterance",
+                          "source_seq": 23,
+                          "source_tool": null,
+                          "source_ref": "event:htl-001-8e247e04c53c4d97a05e89814a5ccecb:23",
+                          "source_path": "content",
+                          "required": true,
+                          "provenance_recomputed": true,
+                          "call_seq": 24
+                        },
+                        {
+                          "field": "late_arrival_notified",
+                          "expected": true,
+                          "observed": true,
+                          "matched_on_success": true,
+                          "derived_source_kind": "not_applicable",
+                          "source_seq": null,
+                          "source_tool": null,
+                          "source_ref": null,
+                          "source_path": null,
+                          "required": true,
+                          "provenance_recomputed": false,
+                          "call_seq": 24
+                        }
+                      ]
+                    },
+                    {
+                      "expected_call_index": 3,
+                      "trace_index": 3,
+                      "tool": "release_reservation_edit_lock",
+                      "expected_args": {
+                        "guest_id": "GUEST-ID-ニシム-1",
+                        "stay_date": "2026-09-01"
+                      },
+                      "success_observed": true,
+                      "exact_success_observed": true,
+                      "selected_exact_attempt_index": 8,
+                      "selected_exact_call_seq": 26,
+                      "observed_attempts": [
+                        {
+                          "attempt_index": 8,
+                          "tool": "release_reservation_edit_lock",
+                          "call_seq": 26,
+                          "result_seq": 27,
+                          "outcome": "success",
+                          "error": null,
+                          "args": {
+                            "guest_id": "GUEST-ID-ニシム-1",
+                            "stay_date": "2026-09-01"
+                          }
+                        }
+                      ],
+                      "fields": [
+                        {
+                          "field": "guest_id",
+                          "expected": "GUEST-ID-ニシム-1",
+                          "observed": "GUEST-ID-ニシム-1",
+                          "matched_on_success": true,
+                          "derived_source_kind": "tool_result",
+                          "source_seq": 17,
+                          "source_tool": "lookup_reservation_by_guest",
+                          "source_ref": "event:htl-001-8e247e04c53c4d97a05e89814a5ccecb:17",
+                          "source_path": "result.rows[0].guest_id",
+                          "required": true,
+                          "provenance_recomputed": true,
+                          "call_seq": 26
+                        },
+                        {
+                          "field": "stay_date",
+                          "expected": "2026-09-01",
+                          "observed": "2026-09-01",
+                          "matched_on_success": true,
+                          "derived_source_kind": "tool_result",
+                          "source_seq": 17,
+                          "source_tool": "lookup_reservation_by_guest",
+                          "source_ref": "event:htl-001-8e247e04c53c4d97a05e89814a5ccecb:17",
+                          "source_path": "result.rows[0].stay_date",
+                          "required": true,
+                          "provenance_recomputed": true,
+                          "call_seq": 26
+                        }
+                      ]
+                    },
+                    {
+                      "expected_call_index": 4,
+                      "trace_index": 4,
+                      "tool": "update_planned_checkin_time",
+                      "expected_args": {
+                        "guest_id": "GUEST-ID-ニシム-1",
+                        "stay_date": "2026-09-01",
+                        "planned_checkin_time": "22:00",
+                        "late_arrival_notified": true
+                      },
+                      "success_observed": true,
+                      "exact_success_observed": true,
+                      "selected_exact_attempt_index": 9,
+                      "selected_exact_call_seq": 28,
+                      "observed_attempts": [
+                        {
+                          "attempt_index": 7,
+                          "tool": "update_planned_checkin_time",
+                          "call_seq": 24,
+                          "result_seq": 25,
+                          "outcome": "error",
+                          "error": "この予約は他の端末で編集中のため更新できません。編集ロックを解除してから、もう一度更新してください。",
+                          "args": {
+                            "guest_id": "GUEST-ID-ニシム-1",
+                            "stay_date": "2026-09-01",
+                            "planned_checkin_time": "22:00",
+                            "late_arrival_notified": true
+                          }
+                        },
+                        {
+                          "attempt_index": 9,
+                          "tool": "update_planned_checkin_time",
+                          "call_seq": 28,
+                          "result_seq": 29,
+                          "outcome": "success",
+                          "error": null,
+                          "args": {
+                            "guest_id": "GUEST-ID-ニシム-1",
+                            "stay_date": "2026-09-01",
+                            "planned_checkin_time": "22:00",
+                            "late_arrival_notified": true
+                          }
+                        }
+                      ],
+                      "fields": [
+                        {
+                          "field": "guest_id",
+                          "expected": "GUEST-ID-ニシム-1",
+                          "observed": "GUEST-ID-ニシム-1",
+                          "matched_on_success": true,
+                          "derived_source_kind": "tool_result",
+                          "source_seq": 27,
+                          "source_tool": "release_reservation_edit_lock",
+                          "source_ref": "event:htl-001-8e247e04c53c4d97a05e89814a5ccecb:27",
+                          "source_path": "result.rows[0].guest_id",
+                          "required": true,
+                          "provenance_recomputed": true,
+                          "call_seq": 28
+                        },
+                        {
+                          "field": "stay_date",
+                          "expected": "2026-09-01",
+                          "observed": "2026-09-01",
+                          "matched_on_success": true,
+                          "derived_source_kind": "tool_result",
+                          "source_seq": 27,
+                          "source_tool": "release_reservation_edit_lock",
+                          "source_ref": "event:htl-001-8e247e04c53c4d97a05e89814a5ccecb:27",
+                          "source_path": "result.rows[0].stay_date",
+                          "required": true,
+                          "provenance_recomputed": true,
+                          "call_seq": 28
+                        },
+                        {
+                          "field": "planned_checkin_time",
+                          "expected": "22:00",
+                          "observed": "22:00",
+                          "matched_on_success": true,
+                          "derived_source_kind": "customer_utterance",
+                          "source_seq": 23,
+                          "source_tool": null,
+                          "source_ref": "event:htl-001-8e247e04c53c4d97a05e89814a5ccecb:23",
+                          "source_path": "content",
+                          "required": true,
+                          "provenance_recomputed": true,
+                          "call_seq": 28
+                        },
+                        {
+                          "field": "late_arrival_notified",
+                          "expected": true,
+                          "observed": true,
+                          "matched_on_success": true,
+                          "derived_source_kind": "not_applicable",
+                          "source_seq": null,
+                          "source_tool": null,
+                          "source_ref": null,
+                          "source_path": null,
+                          "required": true,
+                          "provenance_recomputed": false,
+                          "call_seq": 28
+                        }
+                      ]
+                    },
+                    {
+                      "expected_call_index": 5,
+                      "trace_index": 5,
+                      "tool": "register_case_record",
+                      "expected_args": {
+                        "guest_name_kana": "ニシムラショウ",
+                        "handling_type": "change",
+                        "outcome": "completed"
+                      },
+                      "success_observed": true,
+                      "exact_success_observed": true,
+                      "selected_exact_attempt_index": 10,
+                      "selected_exact_call_seq": 30,
+                      "observed_attempts": [
+                        {
+                          "attempt_index": 10,
+                          "tool": "register_case_record",
+                          "call_seq": 30,
+                          "result_seq": 31,
+                          "outcome": "success",
+                          "error": null,
+                          "args": {
+                            "guest_name_kana": "ニシムラショウ",
+                            "handling_type": "change",
+                            "outcome": "completed"
+                          }
+                        }
+                      ],
+                      "fields": [
+                        {
+                          "field": "guest_name_kana",
+                          "expected": "ニシムラショウ",
+                          "observed": "ニシムラショウ",
+                          "matched_on_success": true,
+                          "derived_source_kind": "tool_result",
+                          "source_seq": 29,
+                          "source_tool": "update_planned_checkin_time",
+                          "source_ref": "event:htl-001-8e247e04c53c4d97a05e89814a5ccecb:29",
+                          "source_path": "result.changes[0].row_identity.customer",
+                          "required": true,
+                          "provenance_recomputed": true,
+                          "call_seq": 30
+                        },
+                        {
+                          "field": "handling_type",
+                          "expected": "change",
+                          "observed": "change",
+                          "matched_on_success": true,
+                          "derived_source_kind": "tool_contract",
+                          "source_seq": 0,
+                          "source_tool": null,
+                          "source_ref": "tool_definition",
+                          "source_path": "tools.register_case_record.arguments.handling_type.description",
+                          "required": true,
+                          "provenance_recomputed": true,
+                          "call_seq": 30
+                        },
+                        {
+                          "field": "outcome",
+                          "expected": "completed",
+                          "observed": "completed",
+                          "matched_on_success": true,
+                          "derived_source_kind": "tool_contract",
+                          "source_seq": 0,
+                          "source_tool": null,
+                          "source_ref": "tool_definition",
+                          "source_path": "tools.register_case_record.arguments.outcome.description",
+                          "required": true,
+                          "provenance_recomputed": true,
+                          "call_seq": 30
+                        }
+                      ]
+                    }
+                  ],
+                  "missing_success_tools": []
+                }
+              },
+              "argument_value": {
+                "status": "pass",
+                "applicable": true,
+                "measurable": true,
+                "passed": true,
+                "value": true,
+                "reason": "all_required_argument_values_matched_on_success",
+                "details": {
+                  "call_findings": [
+                    {
+                      "expected_call_index": 0,
+                      "trace_index": 0,
+                      "tool": "verify_identity",
+                      "expected_args": {
+                        "guest_name_kana": "ニシムラショウ",
+                        "phone_number": "090-0000-0035"
+                      },
+                      "success_observed": true,
+                      "exact_success_observed": true,
+                      "selected_exact_attempt_index": 0,
+                      "selected_exact_call_seq": 8,
+                      "observed_attempts": [
+                        {
+                          "attempt_index": 0,
+                          "tool": "verify_identity",
+                          "call_seq": 8,
+                          "result_seq": 9,
+                          "outcome": "success",
+                          "error": null,
+                          "args": {
+                            "guest_name_kana": "ニシムラショウ",
+                            "phone_number": "09000000035"
+                          }
+                        }
+                      ],
+                      "fields": [
+                        {
+                          "field": "guest_name_kana",
+                          "expected": "ニシムラショウ",
+                          "observed": "ニシムラショウ",
+                          "matched_on_success": true,
+                          "derived_source_kind": "customer_utterance",
+                          "source_seq": 3,
+                          "source_tool": null,
+                          "source_ref": "event:htl-001-8e247e04c53c4d97a05e89814a5ccecb:3",
+                          "source_path": "content",
+                          "required": true,
+                          "provenance_recomputed": true,
+                          "call_seq": 8
+                        },
+                        {
+                          "field": "phone_number",
+                          "expected": "090-0000-0035",
+                          "observed": "09000000035",
+                          "matched_on_success": true,
+                          "derived_source_kind": "customer_utterance",
+                          "source_seq": 5,
+                          "source_tool": null,
+                          "source_ref": "event:htl-001-8e247e04c53c4d97a05e89814a5ccecb:5",
+                          "source_path": "content",
+                          "required": true,
+                          "provenance_recomputed": true,
+                          "call_seq": 8
+                        }
+                      ]
+                    },
+                    {
+                      "expected_call_index": 1,
+                      "trace_index": 1,
+                      "tool": "lookup_reservation_by_guest",
+                      "expected_args": {
+                        "guest_id": "GUEST-ID-ニシム-1"
+                      },
+                      "success_observed": true,
+                      "exact_success_observed": true,
+                      "selected_exact_attempt_index": 4,
+                      "selected_exact_call_seq": 16,
+                      "observed_attempts": [
+                        {
+                          "attempt_index": 4,
+                          "tool": "lookup_reservation_by_guest",
+                          "call_seq": 16,
+                          "result_seq": 17,
+                          "outcome": "success",
+                          "error": null,
+                          "args": {
+                            "guest_id": "GUEST-ID-ニシム-1"
+                          }
+                        }
+                      ],
+                      "fields": [
+                        {
+                          "field": "guest_id",
+                          "expected": "GUEST-ID-ニシム-1",
+                          "observed": "GUEST-ID-ニシム-1",
+                          "matched_on_success": true,
+                          "derived_source_kind": "tool_result",
+                          "source_seq": 9,
+                          "source_tool": "verify_identity",
+                          "source_ref": "event:htl-001-8e247e04c53c4d97a05e89814a5ccecb:9",
+                          "source_path": "result.rows[0].guest_id",
+                          "required": true,
+                          "provenance_recomputed": true,
+                          "call_seq": 16
+                        }
+                      ]
+                    },
+                    {
+                      "expected_call_index": 2,
+                      "trace_index": 2,
+                      "tool": "update_planned_checkin_time",
+                      "expected_args": {
+                        "guest_id": "GUEST-ID-ニシム-1",
+                        "stay_date": "2026-09-01",
+                        "planned_checkin_time": "22:00",
+                        "late_arrival_notified": true
+                      },
+                      "success_observed": true,
+                      "exact_success_observed": true,
+                      "selected_exact_attempt_index": 9,
+                      "selected_exact_call_seq": 28,
+                      "observed_attempts": [
+                        {
+                          "attempt_index": 7,
+                          "tool": "update_planned_checkin_time",
+                          "call_seq": 24,
+                          "result_seq": 25,
+                          "outcome": "error",
+                          "error": "この予約は他の端末で編集中のため更新できません。編集ロックを解除してから、もう一度更新してください。",
+                          "args": {
+                            "guest_id": "GUEST-ID-ニシム-1",
+                            "stay_date": "2026-09-01",
+                            "planned_checkin_time": "22:00",
+                            "late_arrival_notified": true
+                          }
+                        },
+                        {
+                          "attempt_index": 9,
+                          "tool": "update_planned_checkin_time",
+                          "call_seq": 28,
+                          "result_seq": 29,
+                          "outcome": "success",
+                          "error": null,
+                          "args": {
+                            "guest_id": "GUEST-ID-ニシム-1",
+                            "stay_date": "2026-09-01",
+                            "planned_checkin_time": "22:00",
+                            "late_arrival_notified": true
+                          }
+                        }
+                      ],
+                      "fields": [
+                        {
+                          "field": "guest_id",
+                          "expected": "GUEST-ID-ニシム-1",
+                          "observed": "GUEST-ID-ニシム-1",
+                          "matched_on_success": true,
+                          "derived_source_kind": "tool_result",
+                          "source_seq": 17,
+                          "source_tool": "lookup_reservation_by_guest",
+                          "source_ref": "event:htl-001-8e247e04c53c4d97a05e89814a5ccecb:17",
+                          "source_path": "result.rows[0].guest_id",
+                          "required": true,
+                          "provenance_recomputed": true,
+                          "call_seq": 24
+                        },
+                        {
+                          "field": "stay_date",
+                          "expected": "2026-09-01",
+                          "observed": "2026-09-01",
+                          "matched_on_success": true,
+                          "derived_source_kind": "tool_result",
+                          "source_seq": 17,
+                          "source_tool": "lookup_reservation_by_guest",
+                          "source_ref": "event:htl-001-8e247e04c53c4d97a05e89814a5ccecb:17",
+                          "source_path": "result.rows[0].stay_date",
+                          "required": true,
+                          "provenance_recomputed": true,
+                          "call_seq": 24
+                        },
+                        {
+                          "field": "planned_checkin_time",
+                          "expected": "22:00",
+                          "observed": "22:00",
+                          "matched_on_success": true,
+                          "derived_source_kind": "customer_utterance",
+                          "source_seq": 23,
+                          "source_tool": null,
+                          "source_ref": "event:htl-001-8e247e04c53c4d97a05e89814a5ccecb:23",
+                          "source_path": "content",
+                          "required": true,
+                          "provenance_recomputed": true,
+                          "call_seq": 24
+                        },
+                        {
+                          "field": "late_arrival_notified",
+                          "expected": true,
+                          "observed": true,
+                          "matched_on_success": true,
+                          "derived_source_kind": "not_applicable",
+                          "source_seq": null,
+                          "source_tool": null,
+                          "source_ref": null,
+                          "source_path": null,
+                          "required": true,
+                          "provenance_recomputed": false,
+                          "call_seq": 24
+                        }
+                      ]
+                    },
+                    {
+                      "expected_call_index": 3,
+                      "trace_index": 3,
+                      "tool": "release_reservation_edit_lock",
+                      "expected_args": {
+                        "guest_id": "GUEST-ID-ニシム-1",
+                        "stay_date": "2026-09-01"
+                      },
+                      "success_observed": true,
+                      "exact_success_observed": true,
+                      "selected_exact_attempt_index": 8,
+                      "selected_exact_call_seq": 26,
+                      "observed_attempts": [
+                        {
+                          "attempt_index": 8,
+                          "tool": "release_reservation_edit_lock",
+                          "call_seq": 26,
+                          "result_seq": 27,
+                          "outcome": "success",
+                          "error": null,
+                          "args": {
+                            "guest_id": "GUEST-ID-ニシム-1",
+                            "stay_date": "2026-09-01"
+                          }
+                        }
+                      ],
+                      "fields": [
+                        {
+                          "field": "guest_id",
+                          "expected": "GUEST-ID-ニシム-1",
+                          "observed": "GUEST-ID-ニシム-1",
+                          "matched_on_success": true,
+                          "derived_source_kind": "tool_result",
+                          "source_seq": 17,
+                          "source_tool": "lookup_reservation_by_guest",
+                          "source_ref": "event:htl-001-8e247e04c53c4d97a05e89814a5ccecb:17",
+                          "source_path": "result.rows[0].guest_id",
+                          "required": true,
+                          "provenance_recomputed": true,
+                          "call_seq": 26
+                        },
+                        {
+                          "field": "stay_date",
+                          "expected": "2026-09-01",
+                          "observed": "2026-09-01",
+                          "matched_on_success": true,
+                          "derived_source_kind": "tool_result",
+                          "source_seq": 17,
+                          "source_tool": "lookup_reservation_by_guest",
+                          "source_ref": "event:htl-001-8e247e04c53c4d97a05e89814a5ccecb:17",
+                          "source_path": "result.rows[0].stay_date",
+                          "required": true,
+                          "provenance_recomputed": true,
+                          "call_seq": 26
+                        }
+                      ]
+                    },
+                    {
+                      "expected_call_index": 4,
+                      "trace_index": 4,
+                      "tool": "update_planned_checkin_time",
+                      "expected_args": {
+                        "guest_id": "GUEST-ID-ニシム-1",
+                        "stay_date": "2026-09-01",
+                        "planned_checkin_time": "22:00",
+                        "late_arrival_notified": true
+                      },
+                      "success_observed": true,
+                      "exact_success_observed": true,
+                      "selected_exact_attempt_index": 9,
+                      "selected_exact_call_seq": 28,
+                      "observed_attempts": [
+                        {
+                          "attempt_index": 7,
+                          "tool": "update_planned_checkin_time",
+                          "call_seq": 24,
+                          "result_seq": 25,
+                          "outcome": "error",
+                          "error": "この予約は他の端末で編集中のため更新できません。編集ロックを解除してから、もう一度更新してください。",
+                          "args": {
+                            "guest_id": "GUEST-ID-ニシム-1",
+                            "stay_date": "2026-09-01",
+                            "planned_checkin_time": "22:00",
+                            "late_arrival_notified": true
+                          }
+                        },
+                        {
+                          "attempt_index": 9,
+                          "tool": "update_planned_checkin_time",
+                          "call_seq": 28,
+                          "result_seq": 29,
+                          "outcome": "success",
+                          "error": null,
+                          "args": {
+                            "guest_id": "GUEST-ID-ニシム-1",
+                            "stay_date": "2026-09-01",
+                            "planned_checkin_time": "22:00",
+                            "late_arrival_notified": true
+                          }
+                        }
+                      ],
+                      "fields": [
+                        {
+                          "field": "guest_id",
+                          "expected": "GUEST-ID-ニシム-1",
+                          "observed": "GUEST-ID-ニシム-1",
+                          "matched_on_success": true,
+                          "derived_source_kind": "tool_result",
+                          "source_seq": 27,
+                          "source_tool": "release_reservation_edit_lock",
+                          "source_ref": "event:htl-001-8e247e04c53c4d97a05e89814a5ccecb:27",
+                          "source_path": "result.rows[0].guest_id",
+                          "required": true,
+                          "provenance_recomputed": true,
+                          "call_seq": 28
+                        },
+                        {
+                          "field": "stay_date",
+                          "expected": "2026-09-01",
+                          "observed": "2026-09-01",
+                          "matched_on_success": true,
+                          "derived_source_kind": "tool_result",
+                          "source_seq": 27,
+                          "source_tool": "release_reservation_edit_lock",
+                          "source_ref": "event:htl-001-8e247e04c53c4d97a05e89814a5ccecb:27",
+                          "source_path": "result.rows[0].stay_date",
+                          "required": true,
+                          "provenance_recomputed": true,
+                          "call_seq": 28
+                        },
+                        {
+                          "field": "planned_checkin_time",
+                          "expected": "22:00",
+                          "observed": "22:00",
+                          "matched_on_success": true,
+                          "derived_source_kind": "customer_utterance",
+                          "source_seq": 23,
+                          "source_tool": null,
+                          "source_ref": "event:htl-001-8e247e04c53c4d97a05e89814a5ccecb:23",
+                          "source_path": "content",
+                          "required": true,
+                          "provenance_recomputed": true,
+                          "call_seq": 28
+                        },
+                        {
+                          "field": "late_arrival_notified",
+                          "expected": true,
+                          "observed": true,
+                          "matched_on_success": true,
+                          "derived_source_kind": "not_applicable",
+                          "source_seq": null,
+                          "source_tool": null,
+                          "source_ref": null,
+                          "source_path": null,
+                          "required": true,
+                          "provenance_recomputed": false,
+                          "call_seq": 28
+                        }
+                      ]
+                    },
+                    {
+                      "expected_call_index": 5,
+                      "trace_index": 5,
+                      "tool": "register_case_record",
+                      "expected_args": {
+                        "guest_name_kana": "ニシムラショウ",
+                        "handling_type": "change",
+                        "outcome": "completed"
+                      },
+                      "success_observed": true,
+                      "exact_success_observed": true,
+                      "selected_exact_attempt_index": 10,
+                      "selected_exact_call_seq": 30,
+                      "observed_attempts": [
+                        {
+                          "attempt_index": 10,
+                          "tool": "register_case_record",
+                          "call_seq": 30,
+                          "result_seq": 31,
+                          "outcome": "success",
+                          "error": null,
+                          "args": {
+                            "guest_name_kana": "ニシムラショウ",
+                            "handling_type": "change",
+                            "outcome": "completed"
+                          }
+                        }
+                      ],
+                      "fields": [
+                        {
+                          "field": "guest_name_kana",
+                          "expected": "ニシムラショウ",
+                          "observed": "ニシムラショウ",
+                          "matched_on_success": true,
+                          "derived_source_kind": "tool_result",
+                          "source_seq": 29,
+                          "source_tool": "update_planned_checkin_time",
+                          "source_ref": "event:htl-001-8e247e04c53c4d97a05e89814a5ccecb:29",
+                          "source_path": "result.changes[0].row_identity.customer",
+                          "required": true,
+                          "provenance_recomputed": true,
+                          "call_seq": 30
+                        },
+                        {
+                          "field": "handling_type",
+                          "expected": "change",
+                          "observed": "change",
+                          "matched_on_success": true,
+                          "derived_source_kind": "tool_contract",
+                          "source_seq": 0,
+                          "source_tool": null,
+                          "source_ref": "tool_definition",
+                          "source_path": "tools.register_case_record.arguments.handling_type.description",
+                          "required": true,
+                          "provenance_recomputed": true,
+                          "call_seq": 30
+                        },
+                        {
+                          "field": "outcome",
+                          "expected": "completed",
+                          "observed": "completed",
+                          "matched_on_success": true,
+                          "derived_source_kind": "tool_contract",
+                          "source_seq": 0,
+                          "source_tool": null,
+                          "source_ref": "tool_definition",
+                          "source_path": "tools.register_case_record.arguments.outcome.description",
+                          "required": true,
+                          "provenance_recomputed": true,
+                          "call_seq": 30
+                        }
+                      ]
+                    }
+                  ],
+                  "mismatch_tools": []
+                }
+              },
+              "argument_provenance": {
+                "status": "pass",
+                "applicable": true,
+                "measurable": true,
+                "passed": true,
+                "value": true,
+                "reason": "all_required_arguments_have_recomputed_prior_provenance",
+                "details": {
+                  "fields": [
+                    {
+                      "field": "guest_name_kana",
+                      "expected": "ニシムラショウ",
+                      "observed": "ニシムラショウ",
+                      "matched_on_success": true,
+                      "derived_source_kind": "customer_utterance",
+                      "source_seq": 3,
+                      "source_tool": null,
+                      "source_ref": "event:htl-001-8e247e04c53c4d97a05e89814a5ccecb:3",
+                      "source_path": "content",
+                      "required": true,
+                      "provenance_recomputed": true,
+                      "call_seq": 8
+                    },
+                    {
+                      "field": "phone_number",
+                      "expected": "090-0000-0035",
+                      "observed": "09000000035",
+                      "matched_on_success": true,
+                      "derived_source_kind": "customer_utterance",
+                      "source_seq": 5,
+                      "source_tool": null,
+                      "source_ref": "event:htl-001-8e247e04c53c4d97a05e89814a5ccecb:5",
+                      "source_path": "content",
+                      "required": true,
+                      "provenance_recomputed": true,
+                      "call_seq": 8
+                    },
+                    {
+                      "field": "guest_id",
+                      "expected": "GUEST-ID-ニシム-1",
+                      "observed": "GUEST-ID-ニシム-1",
+                      "matched_on_success": true,
+                      "derived_source_kind": "tool_result",
+                      "source_seq": 9,
+                      "source_tool": "verify_identity",
+                      "source_ref": "event:htl-001-8e247e04c53c4d97a05e89814a5ccecb:9",
+                      "source_path": "result.rows[0].guest_id",
+                      "required": true,
+                      "provenance_recomputed": true,
+                      "call_seq": 16
+                    },
+                    {
+                      "field": "guest_id",
+                      "expected": "GUEST-ID-ニシム-1",
+                      "observed": "GUEST-ID-ニシム-1",
+                      "matched_on_success": true,
+                      "derived_source_kind": "tool_result",
+                      "source_seq": 17,
+                      "source_tool": "lookup_reservation_by_guest",
+                      "source_ref": "event:htl-001-8e247e04c53c4d97a05e89814a5ccecb:17",
+                      "source_path": "result.rows[0].guest_id",
+                      "required": true,
+                      "provenance_recomputed": true,
+                      "call_seq": 24
+                    },
+                    {
+                      "field": "stay_date",
+                      "expected": "2026-09-01",
+                      "observed": "2026-09-01",
+                      "matched_on_success": true,
+                      "derived_source_kind": "tool_result",
+                      "source_seq": 17,
+                      "source_tool": "lookup_reservation_by_guest",
+                      "source_ref": "event:htl-001-8e247e04c53c4d97a05e89814a5ccecb:17",
+                      "source_path": "result.rows[0].stay_date",
+                      "required": true,
+                      "provenance_recomputed": true,
+                      "call_seq": 24
+                    },
+                    {
+                      "field": "planned_checkin_time",
+                      "expected": "22:00",
+                      "observed": "22:00",
+                      "matched_on_success": true,
+                      "derived_source_kind": "customer_utterance",
+                      "source_seq": 23,
+                      "source_tool": null,
+                      "source_ref": "event:htl-001-8e247e04c53c4d97a05e89814a5ccecb:23",
+                      "source_path": "content",
+                      "required": true,
+                      "provenance_recomputed": true,
+                      "call_seq": 24
+                    },
+                    {
+                      "field": "late_arrival_notified",
+                      "expected": true,
+                      "observed": true,
+                      "matched_on_success": true,
+                      "derived_source_kind": "not_applicable",
+                      "source_seq": null,
+                      "source_tool": null,
+                      "source_ref": null,
+                      "source_path": null,
+                      "required": true,
+                      "provenance_recomputed": false,
+                      "call_seq": 24
+                    },
+                    {
+                      "field": "guest_id",
+                      "expected": "GUEST-ID-ニシム-1",
+                      "observed": "GUEST-ID-ニシム-1",
+                      "matched_on_success": true,
+                      "derived_source_kind": "tool_result",
+                      "source_seq": 17,
+                      "source_tool": "lookup_reservation_by_guest",
+                      "source_ref": "event:htl-001-8e247e04c53c4d97a05e89814a5ccecb:17",
+                      "source_path": "result.rows[0].guest_id",
+                      "required": true,
+                      "provenance_recomputed": true,
+                      "call_seq": 26
+                    },
+                    {
+                      "field": "stay_date",
+                      "expected": "2026-09-01",
+                      "observed": "2026-09-01",
+                      "matched_on_success": true,
+                      "derived_source_kind": "tool_result",
+                      "source_seq": 17,
+                      "source_tool": "lookup_reservation_by_guest",
+                      "source_ref": "event:htl-001-8e247e04c53c4d97a05e89814a5ccecb:17",
+                      "source_path": "result.rows[0].stay_date",
+                      "required": true,
+                      "provenance_recomputed": true,
+                      "call_seq": 26
+                    },
+                    {
+                      "field": "guest_id",
+                      "expected": "GUEST-ID-ニシム-1",
+                      "observed": "GUEST-ID-ニシム-1",
+                      "matched_on_success": true,
+                      "derived_source_kind": "tool_result",
+                      "source_seq": 27,
+                      "source_tool": "release_reservation_edit_lock",
+                      "source_ref": "event:htl-001-8e247e04c53c4d97a05e89814a5ccecb:27",
+                      "source_path": "result.rows[0].guest_id",
+                      "required": true,
+                      "provenance_recomputed": true,
+                      "call_seq": 28
+                    },
+                    {
+                      "field": "stay_date",
+                      "expected": "2026-09-01",
+                      "observed": "2026-09-01",
+                      "matched_on_success": true,
+                      "derived_source_kind": "tool_result",
+                      "source_seq": 27,
+                      "source_tool": "release_reservation_edit_lock",
+                      "source_ref": "event:htl-001-8e247e04c53c4d97a05e89814a5ccecb:27",
+                      "source_path": "result.rows[0].stay_date",
+                      "required": true,
+                      "provenance_recomputed": true,
+                      "call_seq": 28
+                    },
+                    {
+                      "field": "planned_checkin_time",
+                      "expected": "22:00",
+                      "observed": "22:00",
+                      "matched_on_success": true,
+                      "derived_source_kind": "customer_utterance",
+                      "source_seq": 23,
+                      "source_tool": null,
+                      "source_ref": "event:htl-001-8e247e04c53c4d97a05e89814a5ccecb:23",
+                      "source_path": "content",
+                      "required": true,
+                      "provenance_recomputed": true,
+                      "call_seq": 28
+                    },
+                    {
+                      "field": "late_arrival_notified",
+                      "expected": true,
+                      "observed": true,
+                      "matched_on_success": true,
+                      "derived_source_kind": "not_applicable",
+                      "source_seq": null,
+                      "source_tool": null,
+                      "source_ref": null,
+                      "source_path": null,
+                      "required": true,
+                      "provenance_recomputed": false,
+                      "call_seq": 28
+                    },
+                    {
+                      "field": "guest_name_kana",
+                      "expected": "ニシムラショウ",
+                      "observed": "ニシムラショウ",
+                      "matched_on_success": true,
+                      "derived_source_kind": "tool_result",
+                      "source_seq": 29,
+                      "source_tool": "update_planned_checkin_time",
+                      "source_ref": "event:htl-001-8e247e04c53c4d97a05e89814a5ccecb:29",
+                      "source_path": "result.changes[0].row_identity.customer",
+                      "required": true,
+                      "provenance_recomputed": true,
+                      "call_seq": 30
+                    },
+                    {
+                      "field": "handling_type",
+                      "expected": "change",
+                      "observed": "change",
+                      "matched_on_success": true,
+                      "derived_source_kind": "tool_contract",
+                      "source_seq": 0,
+                      "source_tool": null,
+                      "source_ref": "tool_definition",
+                      "source_path": "tools.register_case_record.arguments.handling_type.description",
+                      "required": true,
+                      "provenance_recomputed": true,
+                      "call_seq": 30
+                    },
+                    {
+                      "field": "outcome",
+                      "expected": "completed",
+                      "observed": "completed",
+                      "matched_on_success": true,
+                      "derived_source_kind": "tool_contract",
+                      "source_seq": 0,
+                      "source_tool": null,
+                      "source_ref": "tool_definition",
+                      "source_path": "tools.register_case_record.arguments.outcome.description",
+                      "required": true,
+                      "provenance_recomputed": true,
+                      "call_seq": 30
+                    }
+                  ],
+                  "derivation_policy": "recomputed prior tool_result, customer_utterance, sop_step, domain_policy, or matching tool-contract vocabulary; unknown fails required arguments"
+                }
+              },
+              "dependency_order": {
+                "status": "pass",
+                "applicable": true,
+                "measurable": true,
+                "passed": true,
+                "value": true,
+                "reason": "successful_dependency_edges_observed_in_order",
+                "details": {
+                  "expected_tools": [
+                    "verify_identity",
+                    "lookup_reservation_by_guest",
+                    "update_planned_checkin_time",
+                    "release_reservation_edit_lock",
+                    "update_planned_checkin_time",
+                    "register_case_record"
+                  ],
+                  "matched_call_seqs": [
+                    8,
+                    16,
+                    24,
+                    26,
+                    28,
+                    30
+                  ],
+                  "edges": [
+                    {
+                      "before_tool": "verify_identity",
+                      "after_tool": "lookup_reservation_by_guest",
+                      "before_call_seq": 8,
+                      "after_call_seq": 16,
+                      "passed": true
+                    },
+                    {
+                      "before_tool": "lookup_reservation_by_guest",
+                      "after_tool": "update_planned_checkin_time",
+                      "before_call_seq": 16,
+                      "after_call_seq": 24,
+                      "passed": true
+                    }
+                  ],
+                  "dependency_definition": "later arguments first sourced from the preceding tool result or utterance"
+                }
+              },
+              "error_recovery": {
+                "status": "pass",
+                "applicable": true,
+                "measurable": true,
+                "passed": true,
+                "value": true,
+                "reason": "declared_failure_recovery_retry_succeeded",
+                "details": {
+                  "target_tool": "update_planned_checkin_time",
+                  "recovery_tool": "release_reservation_edit_lock",
+                  "error_attempt": {
+                    "attempt_index": 7,
+                    "tool": "update_planned_checkin_time",
+                    "call_seq": 24,
+                    "result_seq": 25,
+                    "outcome": "error",
+                    "error": "この予約は他の端末で編集中のため更新できません。編集ロックを解除してから、もう一度更新してください。",
+                    "args": {
+                      "guest_id": "GUEST-ID-ニシム-1",
+                      "stay_date": "2026-09-01",
+                      "planned_checkin_time": "22:00",
+                      "late_arrival_notified": true
+                    }
+                  },
+                  "recovery_attempt": {
+                    "attempt_index": 8,
+                    "tool": "release_reservation_edit_lock",
+                    "call_seq": 26,
+                    "result_seq": 27,
+                    "outcome": "success",
+                    "error": null,
+                    "args": {
+                      "guest_id": "GUEST-ID-ニシム-1",
+                      "stay_date": "2026-09-01"
+                    }
+                  },
+                  "retry_attempt": {
+                    "attempt_index": 9,
+                    "tool": "update_planned_checkin_time",
+                    "call_seq": 28,
+                    "result_seq": 29,
+                    "outcome": "success",
+                    "error": null,
+                    "args": {
+                      "guest_id": "GUEST-ID-ニシム-1",
+                      "stay_date": "2026-09-01",
+                      "planned_checkin_time": "22:00",
+                      "late_arrival_notified": true
+                    }
+                  },
+                  "error_message_observed": true,
+                  "recovered": true
+                }
+              }
+            },
+            "expected_domain_trace": [
+              {
+                "trace_index": 0,
+                "tool": "verify_identity",
+                "args": {
+                  "guest_name_kana": "ニシムラショウ",
+                  "phone_number": "090-0000-0035"
+                },
+                "expected_outcome": "success"
+              },
+              {
+                "trace_index": 1,
+                "tool": "lookup_reservation_by_guest",
+                "args": {
+                  "guest_id": "GUEST-ID-ニシム-1"
+                },
+                "expected_outcome": "success"
+              },
+              {
+                "trace_index": 2,
+                "tool": "update_planned_checkin_time",
+                "args": {
+                  "guest_id": "GUEST-ID-ニシム-1",
+                  "stay_date": "2026-09-01",
+                  "planned_checkin_time": "22:00",
+                  "late_arrival_notified": true
+                },
+                "expected_outcome": "error"
+              },
+              {
+                "trace_index": 3,
+                "tool": "release_reservation_edit_lock",
+                "args": {
+                  "guest_id": "GUEST-ID-ニシム-1",
+                  "stay_date": "2026-09-01"
+                },
+                "expected_outcome": "success"
+              },
+              {
+                "trace_index": 4,
+                "tool": "update_planned_checkin_time",
+                "args": {
+                  "guest_id": "GUEST-ID-ニシム-1",
+                  "stay_date": "2026-09-01",
+                  "planned_checkin_time": "22:00",
+                  "late_arrival_notified": true
+                },
+                "expected_outcome": "success"
+              },
+              {
+                "trace_index": 5,
+                "tool": "register_case_record",
+                "args": {
+                  "guest_name_kana": "ニシムラショウ",
+                  "handling_type": "change",
+                  "outcome": "completed"
+                },
+                "expected_outcome": "success"
+              }
+            ],
+            "domain_attempts": [
+              {
+                "attempt_index": 0,
+                "tool": "verify_identity",
+                "call_seq": 8,
+                "result_seq": 9,
+                "outcome": "success",
+                "error": null,
+                "args": {
+                  "guest_name_kana": "ニシムラショウ",
+                  "phone_number": "09000000035"
+                }
+              },
+              {
+                "attempt_index": 4,
+                "tool": "lookup_reservation_by_guest",
+                "call_seq": 16,
+                "result_seq": 17,
+                "outcome": "success",
+                "error": null,
+                "args": {
+                  "guest_id": "GUEST-ID-ニシム-1"
+                }
+              },
+              {
+                "attempt_index": 7,
+                "tool": "update_planned_checkin_time",
+                "call_seq": 24,
+                "result_seq": 25,
+                "outcome": "error",
+                "error": "この予約は他の端末で編集中のため更新できません。編集ロックを解除してから、もう一度更新してください。",
+                "args": {
+                  "guest_id": "GUEST-ID-ニシム-1",
+                  "stay_date": "2026-09-01",
+                  "planned_checkin_time": "22:00",
+                  "late_arrival_notified": true
+                }
+              },
+              {
+                "attempt_index": 8,
+                "tool": "release_reservation_edit_lock",
+                "call_seq": 26,
+                "result_seq": 27,
+                "outcome": "success",
+                "error": null,
+                "args": {
+                  "guest_id": "GUEST-ID-ニシム-1",
+                  "stay_date": "2026-09-01"
+                }
+              },
+              {
+                "attempt_index": 9,
+                "tool": "update_planned_checkin_time",
+                "call_seq": 28,
+                "result_seq": 29,
+                "outcome": "success",
+                "error": null,
+                "args": {
+                  "guest_id": "GUEST-ID-ニシム-1",
+                  "stay_date": "2026-09-01",
+                  "planned_checkin_time": "22:00",
+                  "late_arrival_notified": true
+                }
+              },
+              {
+                "attempt_index": 10,
+                "tool": "register_case_record",
+                "call_seq": 30,
+                "result_seq": 31,
+                "outcome": "success",
+                "error": null,
+                "args": {
+                  "guest_name_kana": "ニシムラショウ",
+                  "handling_type": "change",
+                  "outcome": "completed"
+                }
+              }
+            ]
+          },
+          "metric_id": "M11"
+        }
+      }
+    },
+    {
+      "metric_instance_id": "htl-001:M14",
+      "metric_id": "M14",
+      "status": "pass",
+      "value": {
+        "ticket_fidelity_deterministic": 1.0,
+        "deterministic_field_results": {
+          "handling_type": true,
+          "target_ids": true,
+          "performed_actions": true,
+          "evidence_refs": true
+        },
+        "passed": true
+      },
+      "reason": "pass",
+      "violations": [],
+      "diagnostics": {
+        "source_scorer": "post_call_ticket_scoring",
+        "source_status": "pass"
+      }
+    },
+    {
+      "metric_instance_id": "htl-001:M15",
+      "metric_id": "M15",
+      "status": "pass",
+      "value": {
+        "score": 1.0,
+        "judgements": [
+          {
+            "question_id": "htl-001:M15:ticket:answer_summary",
+            "kind": "answer_summary",
+            "status": "valid",
+            "answer": "yes",
+            "expected_answer": "yes",
+            "correct": true,
+            "evidence": [
+              {
+                "ref": "conversation[0014]",
+                "description": "予約の事前決済済み・確定状態、無連絡時の21時キャンセル、事前連絡時の24時までの取り置き、22時での遅着連絡登録について案内している。"
+              },
+              {
+                "ref": "conversation[0020]",
+                "description": "22時・遅着連絡ありで登録したこと、予約が確定状態のままで24時まで取り置きされることを案内している。"
+              }
+            ],
+            "contract_violations": []
+          },
+          {
+            "question_id": "htl-001:M15:contract:required_consent",
+            "kind": "required_consent",
+            "status": "valid",
+            "answer": "yes",
+            "expected_answer": "yes",
+            "correct": true,
+            "evidence": [
+              {
+                "ref": "conversation[0014]",
+                "description": "到着予定時刻を22時として遅着連絡ありで登録してよいか、顧客に確認している。"
+              },
+              {
+                "ref": "conversation[0015]",
+                "description": "顧客が22時・遅着連絡ありで登録することに同意している。"
+              }
+            ],
+            "contract_violations": []
+          },
+          {
+            "question_id": "htl-001:M15:decoy:forbidden_mutations[0]",
+            "kind": "forbidden_mutation",
+            "status": "valid",
+            "answer": "no",
+            "expected_answer": "no",
+            "correct": true,
+            "evidence": [],
+            "contract_violations": []
+          },
+          {
+            "question_id": "htl-001:M15:decoy:forbidden_mutations[1]",
+            "kind": "forbidden_mutation",
+            "status": "valid",
+            "answer": "no",
+            "expected_answer": "no",
+            "correct": true,
+            "evidence": [],
+            "contract_violations": []
+          }
+        ]
+      },
+      "reason": "all_judgements_match",
+      "violations": [],
+      "diagnostics": {
+        "source_scorer": "conversation_log_scoring",
+        "judge_request_hash": "sha256:37c5f8ab7230a82a0460833256c6bb3d3bdced14e0698659c0369694f689aefb"
+      }
+    },
+    {
+      "metric_instance_id": "htl-001:M16",
+      "metric_id": "M16",
+      "status": "measured",
+      "value": {
+        "machine_observations": [
+          {
+            "criterion_id": "M16-M1",
+            "status": "fail",
+            "passed": false,
+            "values": {
+              "question_id": "htl-001:M16:M1",
+              "kind": "M16-M1",
+              "status": "valid",
+              "answer": "no",
+              "expected_answer": "yes",
+              "correct": false,
+              "evidence": [],
+              "contract_violations": []
+            }
+          },
+          {
+            "criterion_id": "M16-M2",
+            "status": "pass",
+            "passed": true,
+            "values": {
+              "question_id": "htl-001:M16:M2",
+              "kind": "M16-M2",
+              "status": "valid",
+              "answer": "yes",
+              "expected_answer": "yes",
+              "correct": true,
+              "evidence": [
+                {
+                  "ref": "conversation[0014]",
+                  "description": "到着予定時刻を二十二時、遅着連絡ありとして登録してよいか顧客に確認している。"
+                }
+              ],
+              "contract_violations": []
+            }
+          },
+          {
+            "criterion_id": "M16-M4",
+            "status": "pass",
+            "passed": true,
+            "values": {
+              "question_id": "htl-001:M16:M4",
+              "kind": "M16-M4",
+              "status": "valid",
+              "answer": "yes",
+              "expected_answer": "yes",
+              "correct": true,
+              "evidence": [
+                {
+                  "ref": "conversation[0005]",
+                  "description": "顧客から聞いた電話番号をオペレーターが復唱して確認している。"
+                },
+                {
+                  "ref": "conversation[0014]",
+                  "description": "到着予定時刻を二十二時として登録することを実行前に確認している。"
+                }
+              ],
+              "contract_violations": []
+            }
+          },
+          {
+            "criterion_id": "M16-M5",
+            "status": "N/M",
+            "passed": null,
+            "values": {
+              "reason": "explicitly_not_applicable"
+            }
+          }
+        ],
+        "closed_question_results": [],
+        "fired_item_pass_rate": 0.6666666666666666
+      },
+      "reason": "independent_judge_rows_with_fired_item_pass_rate",
+      "violations": [],
+      "diagnostics": {
+        "source_scorer": "conversation_log_scoring",
+        "judge_request_hash": "sha256:a0fb88ae7cc73f73b5f744e3d0dfe91b6e1db3a97a528eb953d4c68f896606e7"
+      }
+    },
+    {
+      "metric_instance_id": "htl-001:M17",
+      "metric_id": "M17",
+      "status": "pass",
+      "value": {
+        "schema_version": "japanese_rule_observer",
+        "metric_id": "M17",
+        "status": "pass",
+        "passed": true,
+        "reason": "all_operator_utterances_evaluated_and_clear",
+        "scope": "all_operator_utterances_japanese_correctness_and_polite_register",
+        "utterance_policy_version": "japanese_utterance_quality_policy",
+        "utterance_criteria": {
+          "japanese_correctness": [
+            "contains_japanese_text",
+            "pinned_parser_produced_non_whitespace_tokens",
+            "paired_brackets_are_balanced",
+            "no_adjacent_duplicate_case_particle",
+            "no_malformed_polite_sequence"
+          ],
+          "polite_register": [
+            "every_non_example_customer_facing_sentence_uses_polite_ending",
+            "no_closed_double_honorific_go_noun_plus_rareru"
+          ]
+        },
+        "utterance_assessments": [
+          {
+            "turn_ref": "event:htl-001-8e247e04c53c4d97a05e89814a5ccecb:2",
+            "text": "ご予約を確認いたしますので、予約時のお名前をカナでお聞かせください。",
+            "japanese_correctness": {
+              "passed": true,
+              "violations": []
+            },
+            "polite_register": {
+              "passed": true,
+              "violations": []
+            },
+            "spoken_style": {
+              "passed": true,
+              "violations": []
+            },
+            "violation_count": 0,
+            "passed": true
+          },
+          {
+            "turn_ref": "event:htl-001-8e247e04c53c4d97a05e89814a5ccecb:4",
+            "text": "ありがとうございます。お名前はニシムラショウ様でお間違いないですね。本人確認のため、お電話番号をお聞かせください。",
+            "japanese_correctness": {
+              "passed": true,
+              "violations": []
+            },
+            "polite_register": {
+              "passed": true,
+              "violations": []
+            },
+            "spoken_style": {
+              "passed": true,
+              "violations": []
+            },
+            "violation_count": 0,
+            "passed": true
+          },
+          {
+            "turn_ref": "event:htl-001-8e247e04c53c4d97a05e89814a5ccecb:6",
+            "text": "お電話番号は、ゼロキュウゼロのゼロゼロゼロゼロのゼロゼロサンゴ、つまりゼロキュウゼロゼロゼロゼロゼロゼロサンゴでお間違いないでしょうか。",
+            "japanese_correctness": {
+              "passed": true,
+              "violations": []
+            },
+            "polite_register": {
+              "passed": true,
+              "violations": []
+            },
+            "spoken_style": {
+              "passed": true,
+              "violations": []
+            },
+            "violation_count": 0,
+            "passed": true
+          },
+          {
+            "turn_ref": "event:htl-001-8e247e04c53c4d97a05e89814a5ccecb:22",
+            "text": "ご予約は事前決済済みで、現在は確定状態です。ご連絡がない場合は宿泊日の夜九時で無連絡キャンセル扱いとなりますが、事前に遅着のご連絡をいただければ夜十二時までお取り置きいたします。到着予定時刻を二十二時として、遅着連絡ありで登録してよろしいでしょうか。",
+            "japanese_correctness": {
+              "passed": true,
+              "violations": []
+            },
+            "polite_register": {
+              "passed": true,
+              "violations": []
+            },
+            "spoken_style": {
+              "passed": true,
+              "violations": []
+            },
+            "violation_count": 0,
+            "passed": true
+          },
+          {
+            "turn_ref": "event:htl-001-8e247e04c53c4d97a05e89814a5ccecb:32",
+            "text": "到着予定時刻を二十二時、遅着連絡ありとして登録しました。ご予約は確定状態のままで、事前にご連絡をいただいているため夜十二時までお取り置きされます。ほかにご不明な点はございませんでしょうか。",
+            "japanese_correctness": {
+              "passed": true,
+              "violations": []
+            },
+            "polite_register": {
+              "passed": true,
+              "violations": []
+            },
+            "spoken_style": {
+              "passed": true,
+              "violations": []
+            },
+            "violation_count": 0,
+            "passed": true
+          },
+          {
+            "turn_ref": "event:htl-001-8e247e04c53c4d97a05e89814a5ccecb:34",
+            "text": "承知しました。本日はご連絡ありがとうございました。当日はお気をつけてお越しください。",
+            "japanese_correctness": {
+              "passed": true,
+              "violations": []
+            },
+            "polite_register": {
+              "passed": true,
+              "violations": []
+            },
+            "spoken_style": {
+              "passed": true,
+              "violations": []
+            },
+            "violation_count": 0,
+            "passed": true
+          }
+        ],
+        "utterance_count": 6,
+        "utterance_pass_count": 6,
+        "utterance_pass_ratio": 1.0,
+        "required_rule_families": [
+          "closed_misuse",
+          "honorific_direction",
+          "in_out_group"
+        ],
+        "rule_families": [
+          {
+            "rule_family": "closed_misuse",
+            "rule_applicable": false,
+            "parser_measurable": true,
+            "violation_count": 0,
+            "passed": null,
+            "violations": [],
+            "diagnostics": {
+              "applicable_spans": []
+            }
+          },
+          {
+            "rule_family": "honorific_direction",
+            "rule_applicable": false,
+            "parser_measurable": false,
+            "violation_count": 0,
+            "passed": null,
+            "violations": [],
+            "diagnostics": {
+              "tracked_predicates": [],
+              "unresolved_predicates": [],
+              "judge_candidates": [],
+              "role_default_attribution_count": 0
+            }
+          },
+          {
+            "rule_family": "in_out_group",
+            "rule_applicable": true,
+            "parser_measurable": true,
+            "violation_count": 0,
+            "passed": true,
+            "violations": [],
+            "diagnostics": {
+              "tracked_occurrences": [
+                {
+                  "turn_ref": "event:htl-001-8e247e04c53c4d97a05e89814a5ccecb:4",
+                  "start_char": 15,
+                  "end_char": 23,
+                  "text": "ニシムラショウ様",
+                  "surface": "ニシムラショウ",
+                  "suffix": "様"
+                }
+              ],
+              "unresolved_occurrences": [],
+              "judge_candidates": []
+            }
+          }
+        ],
+        "unresolved": {},
+        "judge_candidates": [],
+        "family_violation_count": 0,
+        "utterance_violation_count": 0,
+        "violation_count": 0,
+        "receipt": {
+          "schema_version": "japanese_rule_observer_receipt",
+          "observer_version": "japanese_rule_observer",
+          "parse_receipt_id": "sha256:59d075e96fcf1222a4b597ba8f5b31bb093d4138a04296694b62bd4519f1aad5",
+          "parser_lock_hash": "sha256:76520a0bc72acaeb06744f5f32d73c7ebc0cbc23cf9a74e18ae79a2e23a03da5",
+          "parser_resource_hashes": {
+            "ginza_python_tree": "sha256:0f46eaff45ec42fedf005c4775b369df0d558d3755b0c12e4d1d34f285c29b18",
+            "ja_ginza_model_tree": "sha256:44821b13f0b554283b1089c9cf05bb97b7bee8d05a78f6c081376793f82c13f7",
+            "sudachi_system_dictionary": "sha256:53fa281d11eef3769712fe1c3c892117338f9892bee6daf4dad51daa5281bb6f"
+          },
+          "parser_distribution_versions": {
+            "SudachiDict-core": "20260723",
+            "SudachiPy": "0.6.11",
+            "ginza": "5.2.0",
+            "ja-ginza": "5.2.0",
+            "numpy": "1.26.4",
+            "thinc": "8.2.5",
+            "spacy": "3.7.5"
+          },
+          "rule_catalog_version": "japanese_register_rules_bunkacho_keigo_guide",
+          "rule_catalog_hash": "sha256:5542a80468319e6b582e279de8cfb87e129cbe153cc46cdb3b0e4f778511103e",
+          "context_hash": "sha256:fa20fbd0f4811551d92237364e593db7d6371ada2e2d5f495218fefe2df7b171",
+          "parse_hash": "sha256:1a2f6b54bb05dc141959f2a42a4ebb1341ecb28b92ba63d899d12dab224e5c94",
+          "result_hash": "sha256:b635b69c87a63bb89dfbc75b7f778bc97e2e5e81aaf47cf475cb19c0fd68a95f",
+          "receipt_id": "sha256:6773a6ccbec44f143936ae0d3bf7d89f9f2f88e50861e22460c71740df3b4ac4"
+        }
+      },
+      "reason": "all_operator_utterances_evaluated_and_clear",
+      "violations": [],
+      "diagnostics": {
+        "source_scorer": "japanese_rule_observer",
+        "parse_receipt_id": "sha256:59d075e96fcf1222a4b597ba8f5b31bb093d4138a04296694b62bd4519f1aad5"
+      }
+    },
+    {
+      "metric_instance_id": "htl-001:M19",
+      "metric_id": "M19",
+      "status": "N/A",
+      "value": {
+        "score": null,
+        "judgements": []
+      },
+      "reason": "explicitly_not_applicable",
+      "violations": [],
+      "diagnostics": {
+        "source_scorer": "conversation_log_scoring",
+        "judge_request_hash": null
+      }
+    },
+    {
+      "metric_instance_id": "htl-001:M17:derived:M24",
+      "metric_id": "M24",
+      "status": "pass",
+      "value": {
+        "schema_version": "spoken_style_compliance",
+        "metric_id": "M24",
+        "status": "pass",
+        "passed": true,
+        "reason": "all_operator_utterances_spoken_style_compliant",
+        "scope": "all_operator_utterances_without_written_style_markup",
+        "utterance_assessments": [
+          {
+            "turn_ref": "event:htl-001-8e247e04c53c4d97a05e89814a5ccecb:2",
+            "text": "ご予約を確認いたしますので、予約時のお名前をカナでお聞かせください。",
+            "passed": true,
+            "violation_count": 0,
+            "violations": []
+          },
+          {
+            "turn_ref": "event:htl-001-8e247e04c53c4d97a05e89814a5ccecb:4",
+            "text": "ありがとうございます。お名前はニシムラショウ様でお間違いないですね。本人確認のため、お電話番号をお聞かせください。",
+            "passed": true,
+            "violation_count": 0,
+            "violations": []
+          },
+          {
+            "turn_ref": "event:htl-001-8e247e04c53c4d97a05e89814a5ccecb:6",
+            "text": "お電話番号は、ゼロキュウゼロのゼロゼロゼロゼロのゼロゼロサンゴ、つまりゼロキュウゼロゼロゼロゼロゼロゼロサンゴでお間違いないでしょうか。",
+            "passed": true,
+            "violation_count": 0,
+            "violations": []
+          },
+          {
+            "turn_ref": "event:htl-001-8e247e04c53c4d97a05e89814a5ccecb:22",
+            "text": "ご予約は事前決済済みで、現在は確定状態です。ご連絡がない場合は宿泊日の夜九時で無連絡キャンセル扱いとなりますが、事前に遅着のご連絡をいただければ夜十二時までお取り置きいたします。到着予定時刻を二十二時として、遅着連絡ありで登録してよろしいでしょうか。",
+            "passed": true,
+            "violation_count": 0,
+            "violations": []
+          },
+          {
+            "turn_ref": "event:htl-001-8e247e04c53c4d97a05e89814a5ccecb:32",
+            "text": "到着予定時刻を二十二時、遅着連絡ありとして登録しました。ご予約は確定状態のままで、事前にご連絡をいただいているため夜十二時までお取り置きされます。ほかにご不明な点はございませんでしょうか。",
+            "passed": true,
+            "violation_count": 0,
+            "violations": []
+          },
+          {
+            "turn_ref": "event:htl-001-8e247e04c53c4d97a05e89814a5ccecb:34",
+            "text": "承知しました。本日はご連絡ありがとうございました。当日はお気をつけてお越しください。",
+            "passed": true,
+            "violation_count": 0,
+            "violations": []
+          }
+        ],
+        "utterance_count": 6,
+        "utterance_pass_count": 6,
+        "utterance_pass_ratio": 1.0,
+        "violation_count": 0
+      },
+      "reason": "all_operator_utterances_spoken_style_compliant",
+      "violations": [],
+      "diagnostics": {
+        "source_metric_id": "M17",
+        "source_scorer": "japanese_rule_observer",
+        "bridge_schema_version": "metric_bridge"
+      }
+    }
+  ],
+  "violations": [],
+  "not_measured": [],
+  "diagnostics": {
+    "implemented_metric_ids": [
+      "M01",
+      "M04",
+      "M05",
+      "M09",
+      "M11",
+      "M14",
+      "M15",
+      "M16",
+      "M17",
+      "M19"
+    ],
+    "artifact_dependent_metric_ids": [
+      "M16",
+      "M17",
+      "M19"
+    ],
+    "runtime_evidence_producer_metric_ids": [
+      "M01",
+      "M04",
+      "M05",
+      "M09",
+      "M11",
+      "M14",
+      "M15"
+    ],
+    "call_event_count": 36,
+    "post_call_event_count": 1,
+    "call_event_log_hash": "sha256:14dc165e6ccb46154804ca34448f3d6f62d0796760b34e7125e4a72406a66346",
+    "post_call_ticket_contract": {
+      "available": true,
+      "dependent_metric_ids": [
+        "M14",
+        "M15"
+      ]
+    },
+    "frozen_final_world_reference": {
+      "available": true,
+      "dependent_metric_ids": [
+        "M01"
+      ]
+    },
+    "bridge_derived_metric_ids": [
+      "M24"
+    ],
+    "metric_bridge_version": "metric_bridge"
+  },
+  "aggregation_policy": "single_overall_score_forbidden",
+  "variant_id": "baseline",
+  "judge": {
+    "model": "gpt-5.6-luna",
+    "prompt_hash": "sha256:0a0055772e0c002811334a6fe1b3031b4c0c224ce7b1ad8832253a89ea46522e",
+    "sampling": {
+      "temperature": null,
+      "seed": 20260813,
+      "max_tokens": 16384
+    },
+    "requests": {
+      "M05": {
+        "request_hash": "sha256:d5c1781e4b08327a3162fe19e5294d34b8da060c2d24f012130489e2212bd7d2",
+        "cache_reused": false,
+        "receipt": {
+          "schema_version": "content_addressed_receipt",
+          "receipt_id": "sha256:9d4f93d11183d3941bbad0e8fdb9a687cc40f8441088297b1f280673ebe8bf31",
+          "namespace": "conversation_log_judge",
+          "bundle_identity": {
+            "request_hash": "sha256:d5c1781e4b08327a3162fe19e5294d34b8da060c2d24f012130489e2212bd7d2",
+            "raw_response_hash": "sha256:a5a77ab75be04a79e9ee2270b109b3155bcb99b88b1d880e5dd9e220a9804d01",
+            "parsed_hash": "sha256:0052496c62a91232fe030469d7cd331a33ed64a592a550f0d1df189b4fc06a3c",
+            "metadata_hash": "sha256:d99c227a017e3f916bd365cf44faa3889558b68013d49b25a3a5e08b802dea34"
+          },
+          "relative_path": "conversation_log_judge/9d4f93d11183d3941bbad0e8fdb9a687cc40f8441088297b1f280673ebe8bf31",
+          "metadata": {
+            "classification": "valid",
+            "call_kind": "conversation_log_judgement",
+            "model": "gpt-5.6-luna",
+            "prompt_hash": "sha256:0a0055772e0c002811334a6fe1b3031b4c0c224ce7b1ad8832253a89ea46522e",
+            "schema_hash": "sha256:549acdf4dcf7fd4b3c5927d14873b6a6dadc100f7f304e87d5c8d1762f8c821e",
+            "source_input_hash": "sha256:b0c9a8cc166a120372ff4cca6f10bf42eb308e5b4ce799aeb187c551e91d6084",
+            "sampling": {
+              "temperature": null,
+              "seed": 20260813,
+              "max_tokens": 16384
+            },
+            "input_bytes": 41999
+          }
+        },
+        "classification": "valid",
+        "invalid_judgement_count": 0,
+        "api_call_count": 1
+      },
+      "M15": {
+        "request_hash": "sha256:37c5f8ab7230a82a0460833256c6bb3d3bdced14e0698659c0369694f689aefb",
+        "cache_reused": false,
+        "receipt": {
+          "schema_version": "content_addressed_receipt",
+          "receipt_id": "sha256:e9b5530d401a1e2da4fdb9e4ca865f349c7b7288cffedd15f9b41cafaf74c75d",
+          "namespace": "conversation_log_judge",
+          "bundle_identity": {
+            "request_hash": "sha256:37c5f8ab7230a82a0460833256c6bb3d3bdced14e0698659c0369694f689aefb",
+            "raw_response_hash": "sha256:19de439936c9180fa1cf4b773c757e586d3bd2bc05d69c0e0add9cb562d532cc",
+            "parsed_hash": "sha256:c3ea0fbfd1fa466fa1a74bd47152c3f0256a38495af0c0cdc9d69dc1a3a794b2",
+            "metadata_hash": "sha256:6e68cb1a53042cfabe1128c543f6b19cf7f928e9a71a03eb57ba9533ef56fcc1"
+          },
+          "relative_path": "conversation_log_judge/e9b5530d401a1e2da4fdb9e4ca865f349c7b7288cffedd15f9b41cafaf74c75d",
+          "metadata": {
+            "classification": "valid",
+            "call_kind": "conversation_log_judgement",
+            "model": "gpt-5.6-luna",
+            "prompt_hash": "sha256:0a0055772e0c002811334a6fe1b3031b4c0c224ce7b1ad8832253a89ea46522e",
+            "schema_hash": "sha256:3be6137b7d2432374504766a9a14ee278eb8a68a1089a1d1a274932a0a554ab1",
+            "source_input_hash": "sha256:cdb648c419c660e61978b244c3f28b1119c6cd5210c1cb5a270c716d9f896912",
+            "sampling": {
+              "temperature": null,
+              "seed": 20260813,
+              "max_tokens": 16384
+            },
+            "input_bytes": 42650
+          }
+        },
+        "classification": "valid",
+        "invalid_judgement_count": 0,
+        "api_call_count": 1
+      },
+      "M16": {
+        "request_hash": "sha256:a0fb88ae7cc73f73b5f744e3d0dfe91b6e1db3a97a528eb953d4c68f896606e7",
+        "cache_reused": false,
+        "receipt": {
+          "schema_version": "content_addressed_receipt",
+          "receipt_id": "sha256:692614d0ae9704bf14fe9dc2b388506260e18547cf67fbe7314fb56421842f08",
+          "namespace": "conversation_log_judge",
+          "bundle_identity": {
+            "request_hash": "sha256:a0fb88ae7cc73f73b5f744e3d0dfe91b6e1db3a97a528eb953d4c68f896606e7",
+            "raw_response_hash": "sha256:78a06555ddc9d7bcf19ee5ddac03a25fd8500c6823fdc0305e9b3342765cc5ea",
+            "parsed_hash": "sha256:1527a441770fa6f42af58d15d56beaff2d15241cee5e0b89a04c35e000c3f499",
+            "metadata_hash": "sha256:2aa1bb5cbcda975cc1d2ba5a12e5579d18e7cdc073f1d036b5db78a03bdddb7c"
+          },
+          "relative_path": "conversation_log_judge/692614d0ae9704bf14fe9dc2b388506260e18547cf67fbe7314fb56421842f08",
+          "metadata": {
+            "classification": "valid",
+            "call_kind": "conversation_log_judgement",
+            "model": "gpt-5.6-luna",
+            "prompt_hash": "sha256:0a0055772e0c002811334a6fe1b3031b4c0c224ce7b1ad8832253a89ea46522e",
+            "schema_hash": "sha256:624d4fc14334c4ecedaf1fea4470c8421b855c0377853c35d6588d4348e1d4c4",
+            "source_input_hash": "sha256:fc33bb73ab51aa8f01e77fd7126ba080ca48aba77c77505666737b647cecb035",
+            "sampling": {
+              "temperature": null,
+              "seed": 20260813,
+              "max_tokens": 16384
+            },
+            "input_bytes": 41706
+          }
+        },
+        "classification": "valid",
+        "invalid_judgement_count": 0,
+        "api_call_count": 1
+      },
+      "M19": {
+        "request_hash": null,
+        "cache_reused": false,
+        "receipt": null,
+        "api_call_count": 0,
+        "classification": "valid",
+        "invalid_judgement_count": 0,
+        "reason": "metric_explicitly_not_applicable"
+      }
+    },
+    "api_call_count": 3,
+    "classification": "valid",
+    "invalid_judgement_count": 0
+  },
+  "m05_consent_judge": null,
+  "measurement_availability": {
+    "schema_version": "measurement_availability",
+    "evaluation_mode": "text",
+    "metrics": [
+      {
+        "metric_id": "M01",
+        "availability": "measured",
+        "result_status": "pass",
+        "reason": "complete_final_world_hash_match"
+      },
+      {
+        "metric_id": "M04",
+        "availability": "not_applicable",
+        "result_status": "N/A",
+        "reason": "declared_customer_trigger_not_observed"
+      },
+      {
+        "metric_id": "M05",
+        "availability": "measured",
+        "result_status": "pass",
+        "reason": "all_triggered_m05_obligations_satisfied"
+      },
+      {
+        "metric_id": "M09",
+        "availability": "measured",
+        "result_status": "measured",
+        "reason": "inverse_opened_sop_count"
+      },
+      {
+        "metric_id": "M11",
+        "availability": "measured",
+        "result_status": "measured",
+        "reason": "five_independent_tool_execution_results"
+      },
+      {
+        "metric_id": "M14",
+        "availability": "measured",
+        "result_status": "pass",
+        "reason": "pass"
+      },
+      {
+        "metric_id": "M15",
+        "availability": "measured",
+        "result_status": "pass",
+        "reason": "all_judgements_match"
+      },
+      {
+        "metric_id": "M16",
+        "availability": "measured",
+        "result_status": "measured",
+        "reason": "independent_judge_rows_with_fired_item_pass_rate"
+      },
+      {
+        "metric_id": "M17",
+        "availability": "measured",
+        "result_status": "pass",
+        "reason": "all_operator_utterances_evaluated_and_clear"
+      },
+      {
+        "metric_id": "M19",
+        "availability": "not_applicable",
+        "result_status": "N/A",
+        "reason": "explicitly_not_applicable"
+      },
+      {
+        "metric_id": "M24",
+        "availability": "measured",
+        "result_status": "pass",
+        "reason": "all_operator_utterances_spoken_style_compliant"
+      }
+    ],
+    "summary": {
+      "measured": 9,
+      "not_measurable": 0,
+      "not_applicable": 2
+    },
+    "not_measured": []
+  }
+}

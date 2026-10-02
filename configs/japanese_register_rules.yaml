@@ -1,0 +1,51 @@
+schema_version: japanese_register_rules
+catalog_version: japanese_register_rules_bunkacho_keigo_guide
+normative_sources:
+  - source_ref: bunka_keigo_guide_2007
+    title: 敬語の指針
+    publisher: 文化審議会
+    published: "2007-02-02"
+    url: https://www.bunka.go.jp/seisaku/bunkashingikai/kokugo/hokoku/pdf/keigo_tosin.pdf
+rule_families:
+  closed_misuse:
+    tracked_patterns:
+      - "(?:いらっしゃ|おっしゃ|申し上げ|伺|参り)"
+      - "(?:お|ご)[^。！？\\s]{1,12}にな"
+      - "お召し上がり"
+    violation_rules:
+      - rule_id: KJ-CLOSED-DOUBLE-IRASSHARU-001
+        pattern: "いらっしゃられ"
+        reason_code: double_honorific_closed_form
+        source_ref: bunka_keigo_guide_2007
+      - rule_id: KJ-CLOSED-DOUBLE-O_NI_NARU-002
+        pattern: "(?:お(?:読み|書き|話し|待ち|帰り|使い|選び|持ち)|ご(?:利用|確認|説明|記入))になられ"
+        reason_code: double_honorific_o_go_ni_naru_plus_rareru
+        source_ref: bunka_keigo_guide_2007
+      - rule_id: KJ-CLOSED-DOUBLE-MESHIAGARU-003
+        pattern: "お召し上がりにな"
+        reason_code: double_honorific_o_plus_irregular_honorific
+        source_ref: bunka_keigo_guide_2007
+  honorific_direction:
+    honorific_lemmas:
+      - いらっしゃる
+      - おっしゃる
+      - 召し上がる
+    humble_lemmas:
+      - 参る
+      - 伺う
+      - 申す
+      - 申し上げる
+    honorific_allowed_relations:
+      - customer
+      - out_group
+    humble_allowed_relations:
+      - self
+      - in_group
+    source_ref: bunka_keigo_guide_2007
+  in_out_group:
+    honorific_suffixes:
+      - 様
+    forbidden_relations:
+      - self
+      - in_group
+    source_ref: bunka_keigo_guide_2007

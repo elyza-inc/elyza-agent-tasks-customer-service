@@ -1,0 +1,287 @@
+{
+  "schema_version": "metric_inventory",
+  "catalog_version": "metric_catalog_reorg_20260727",
+  "inventory_id": "metric_inventory_reorg_20260727",
+  "single_overall_score": {
+    "allowed": false,
+    "forbidden_output_keys": [
+      "overall_score",
+      "single_overall_score"
+    ]
+  },
+  "metric_rows": [
+    {
+      "metric_id": "M01",
+      "name": "解決",
+      "category": "解決",
+      "status": "active",
+      "artifact_owner": "frozen_final_world_reference",
+      "handling_types": [
+        "change_procedure",
+        "guidance_inquiry_answer",
+        "refusal",
+        "escalation",
+        "callback_commitment",
+        "incomplete"
+      ],
+      "completion_contract": {
+        "change_procedure": "full_final_world_sha256",
+        "guidance_inquiry_answer": "full_final_world_sha256_with_interaction_record",
+        "refusal": "full_final_world_sha256_with_interaction_record",
+        "escalation": "full_final_world_sha256",
+        "callback_commitment": "full_final_world_sha256",
+        "incomplete": "incomplete_is_not_resolution"
+      },
+      "result_shape": {
+        "resolution_correct": "run_boolean",
+        "critical_violation_free": "run_boolean"
+      },
+      "notes": "resolution and violation information are reported side by side; violations do not gate M01"
+    },
+    {
+      "metric_id": "M04",
+      "name": "顧客誘発重大行為の前提統制",
+      "category": "リスク・コンプライアンス統制",
+      "status": "active",
+      "applicability": {
+        "requires_edge": "customer_trigger_event_id -> critical_action_event_id",
+        "operator_initiated_unsafe_action_reporting": "independent_violation_result"
+      },
+      "result_shape": {
+        "passed": "run_boolean"
+      }
+    },
+    {
+      "metric_id": "M05",
+      "name": "重大開示・停止義務の遵守",
+      "category": "リスク・コンプライアンス統制",
+      "status": "active",
+      "result_shape": {
+        "passed": "run_boolean_or_na_nm"
+      },
+      "semantic_strategy": "deterministic_stop_predicates_and_precomputed_closed_questions"
+    },
+    {
+      "metric_id": "M09",
+      "name": "適用手順・分岐の正確性",
+      "category": "業務判断・案内正確性",
+      "status": "active",
+      "result_shape": {
+        "search_hit_correct": "run_boolean",
+        "final_correct": "run_boolean",
+        "one_shot_correct": "run_boolean",
+        "applicable_pass_rate": "run_rate_over_fired_items",
+        "search_hit_rate": "aggregate_rate",
+        "final_accuracy": "aggregate_rate",
+        "one_shot_rate": "aggregate_rate"
+      },
+      "passk_allowed_selectors": [
+        "metrics.M09.final_correct",
+        "metrics.M09.one_shot_correct"
+      ]
+    },
+    {
+      "metric_id": "M11",
+      "name": "処理実行契約の充足",
+      "category": "処理実行・システム正確性",
+      "status": "active",
+      "measurement_epoch": "post_hoc_reads_frozen_call_epoch_only",
+      "result_shape": {
+        "required_success": "run_boolean",
+        "argument_value": "run_boolean",
+        "argument_provenance": "run_boolean",
+        "dependency_order": "run_boolean",
+        "error_recovery": "run_boolean_or_na",
+        "applicable_pass_rate": "run_rate_over_fired_items"
+      }
+    },
+    {
+      "metric_id": "M14",
+      "name": "応対記録の証跡忠実度",
+      "category": "引継ぎ・応対記録・後続管理",
+      "status": "active",
+      "artifact_owner": "operator_post_call_ticket",
+      "result_shape": {
+        "ticket_fidelity_deterministic": "run_number_0_1_or_nm",
+        "deterministic_field_results": "four_field_boolean_map_or_nm",
+        "passed": "run_boolean_or_nm"
+      }
+    },
+    {
+      "metric_id": "M15",
+      "name": "応対記録の会話忠実度",
+      "category": "引継ぎ・応対記録・後続管理",
+      "status": "active",
+      "result_shape": {
+        "ticket_fidelity_conversational": "run_number_0_1_or_na_nm"
+      }
+    },
+    {
+      "metric_id": "M16",
+      "name": "対話進行の適切性",
+      "category": "対話進行・日本語応対品質",
+      "status": "active",
+      "result_shape": {
+        "machine_observations": "M16-M1_M16-M2_M16-M4_M16-M5_rows",
+        "closed_question_results": "applicable_M16_rows_excluding_M16-CQ4",
+        "fired_item_pass_rate": "run_rate_over_fired_binary_items"
+      },
+      "required_scenario_contracts": [
+        "interaction_observation_contract",
+        "interaction_closed_questions"
+      ],
+      "evidence": "frozen_call_messages_and_typed_ticket_only"
+    },
+    {
+      "metric_id": "M17",
+      "name": "日本語の正確性・敬語",
+      "category": "対話進行・日本語応対品質",
+      "status": "active",
+      "result_shape": {
+        "rule_applicable": "rule_family_boolean",
+        "parser_measurable": "rule_family_boolean",
+        "violation_count": "rule_family_count",
+        "passed": "run_boolean_or_nm"
+      },
+      "strategy": "pinned_ginza_high_precision_bunkacho_rules_explicit_relations_only"
+    },
+    {
+      "metric_id": "M19",
+      "name": "困難応対の機能",
+      "category": "対話進行・日本語応対品質",
+      "status": "active",
+      "result_shape": {
+        "machine_observations": "M19_rows_excluding_M19-M4",
+        "closed_question_results": "applicable_M19_closed_question_rows",
+        "fired_item_pass_rate": "run_rate_over_fired_binary_items"
+      },
+      "required_scenario_contracts": [
+        "interaction_observation_contract",
+        "interaction_closed_questions"
+      ],
+      "evidence": "frozen_call_messages_and_typed_ticket_only"
+    },
+    {
+      "metric_id": "M20",
+      "name": "音声重要値のASR合意正確性",
+      "category": "音声知覚・リアルタイム対話",
+      "status": "active",
+      "result_shape": {
+        "passed": "run_boolean_or_na_nm"
+      }
+    },
+    {
+      "metric_id": "M21",
+      "name": "リアルタイムturn制御",
+      "category": "音声知覚・リアルタイム対話",
+      "status": "active",
+      "result_shape": {
+        "passed": "run_boolean_or_na_nm"
+      }
+    },
+    {
+      "metric_id": "M22",
+      "name": "実音声の伝達完遂",
+      "category": "音声知覚・リアルタイム対話",
+      "status": "active",
+      "result_shape": {
+        "passed": "run_boolean_or_na_nm"
+      }
+    },
+    {
+      "metric_id": "M23",
+      "name": "音声信号の技術的品質",
+      "category": "音声知覚・リアルタイム対話",
+      "status": "active",
+      "result_shape": {
+        "passed": "run_boolean_or_na_nm"
+      }
+    }
+  ],
+  "metric_row_extensions": [
+    {
+      "metric_id": "M24",
+      "name": "話し言葉遵守",
+      "name_en": "spoken style compliance",
+      "category": "対話進行・日本語応対品質",
+      "status": "active",
+      "result_shape": {
+        "utterance_pass_ratio": "run_rate_over_operator_utterances_or_nm",
+        "passed": "run_boolean_or_nm"
+      },
+      "strategy": "deterministic_written_style_markup_detection"
+    },
+    {
+      "metric_id": "M25",
+      "name": "復唱の音声正確性",
+      "name_en": "spoken readback accuracy",
+      "category": "音声知覚・リアルタイム対話",
+      "status": "active",
+      "result_shape": {
+        "accuracy": "run_rate_over_observed_readbacks_or_na_nm",
+        "observation_rate": "run_rate_over_customer_spoken_important_values_or_na_nm"
+      },
+      "strategy": "deterministic_same_shape_token_agreement"
+    },
+    {
+      "metric_id": "M26",
+      "name": "根拠付き重要値利用率",
+      "name_en": "grounded important-value use rate",
+      "category": "音声知覚・リアルタイム対話",
+      "status": "active",
+      "result_shape": {
+        "grounded_use_rate": "run_rate_over_customer_important_value_arguments_or_na_nm"
+      },
+      "strategy": "deterministic_recorded_argument_provenance"
+    }
+  ],
+  "retired_metric_rows": [
+    {
+      "metric_id": "M02",
+      "absorbed_by": "removed_resolution_and_violations_reported_side_by_side"
+    },
+    {
+      "metric_id": "M03",
+      "absorbed_by": "measurement_modes.passk_plan"
+    },
+    {
+      "metric_id": "M06",
+      "absorbed_by": "removed_no_noncompensatory_gate"
+    },
+    {
+      "metric_id": "M08",
+      "absorbed_by": "post_hoc_facets_derived_from_M09_and_M11_logs"
+    },
+    {
+      "metric_id": "M10",
+      "absorbed_by": "removed_semantic_transition_metric_not_adopted"
+    },
+    {
+      "metric_id": "M12",
+      "absorbed_by": "M11.error_recovery"
+    },
+    {
+      "metric_id": "M13",
+      "absorbed_by": "removed_horizontal_handoff_scenarios_not_adopted"
+    },
+    {
+      "metric_id": "M18",
+      "absorbed_by": "required_SOP_steps"
+    }
+  ],
+  "gates": [],
+  "diagnostics": [
+    "D01",
+    "D02",
+    "D03",
+    "CH01"
+  ],
+  "measurement_modes": [
+    {
+      "mode_id": "passk_plan",
+      "input": "declared_run_level_boolean_selector",
+      "missing_policy": "stop",
+      "rate_selector_allowed": false
+    }
+  ]
+}

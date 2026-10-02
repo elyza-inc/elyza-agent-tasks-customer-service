@@ -1,0 +1,662 @@
+schema_version: 1
+description: seed files accepted by generation
+
+definitions:
+  scalar_type_values: &scalar_type_values [string, integer, number, boolean, date, time, enum]
+
+  scalar: &scalar
+    type: scalar
+
+  row_selector: &row_selector
+    type: object
+    fields:
+      role: {type: string}
+      role_name: {type: string}
+      customer: {type: string}
+      sequence: {type: integer}
+
+  mutation: &mutation
+    type: object
+    fields:
+      table: {type: string, required: true, non_empty: true}
+      kind: {type: enum, values: [create, update]}
+      record:
+        <<: *row_selector
+        required: true
+      set:
+        type: object
+        required: true
+        additional: *scalar
+      before:
+        type: object
+        additional: *scalar
+
+  completion_contract: &completion_contract
+    type: object
+    fields:
+      handling_type:
+        type: enum
+        values: [change, guidance, refusal, escalation, callback]
+        required: true
+      required_state: {type: string}
+      required_record: {type: string}
+      required_records:
+        type: list
+        of: {type: string}
+        required_if:
+          scope: container_parent
+          path: obligations.達成
+          contains_any: [記録, 証跡]
+      required_disclosures:
+        type: list
+        of: {type: string}
+        required_if:
+          scope: container_parent
+          path: obligations.開示
+          present: true
+      required_consent:
+        type: [string, "null"]
+        required_if:
+          scope: container_parent
+          path: obligations.同意
+          present: true
+      required_callback:
+        type: list
+        of: {type: string}
+      required_handoff:
+        type: [object, string]
+        fields:
+          route: {type: string}
+          next_step: {type: string}
+          record: {type: string}
+      required_next_step: {type: string}
+      required_outcomes:
+        type: list
+        of: {type: string}
+      required_refusal_reason: {type: string}
+      required_route: {type: string}
+      required_mutations:
+        type: list
+        required: true
+        of: *mutation
+      forbidden_mutations:
+        type: list
+        required: true
+        of: *mutation
+
+  input: &input
+    type: object
+    fields:
+      name: {type: string, required: true, non_empty: true}
+      value: {type: any, required: true}
+      spoken: {type: string, non_empty: true}
+      question: {type: string, required: true, non_empty: true}
+      question_step_id: {type: string, required: true, non_empty: true}
+
+  target: &target
+    type: object
+    fields:
+      kind: {type: enum, values: [table, customer, evidence, operation]}
+      table: {type: string}
+      role: {type: string}
+      role_name: {type: string}
+      customer: {type: string}
+      sequence: {type: integer}
+      operation: {type: string}
+
+  expected: &expected
+    type: object
+    fields:
+      targets:
+        type: list
+        required: true
+        of: *target
+      mutations:
+        type: list
+        required: true
+        of: *mutation
+
+  obligations: &obligations
+    type: object
+    fields:
+      本人確認: {type: [string, "null"]}
+      開示: {type: [string, "null"]}
+      同意: {type: [string, "null"]}
+      達成: {type: [string, "null"]}
+      禁止: {type: [string, "null"]}
+      エスカレーション: {type: [string, "null"]}
+
+  tool_filter: &tool_filter
+    type: object
+    field_sets:
+    - [scope, source]
+    - [column, operator, argument]
+    - [column, operator, value]
+    fields:
+      scope: {type: enum, values: [customer]}
+      source: {type: enum, values: [verified_identity]}
+      column: {type: string}
+      argument: {type: string}
+      value: {type: any}
+      operator: {type: enum, values: [eq, lte, gte]}
+
+  mutation_source: &mutation_source
+    type: object
+    field_sets:
+    - [from_argument]
+    - [value]
+    fields:
+      from_argument: {type: string, non_empty: true}
+      value: {type: any}
+
+  tool: &tool
+    type: object
+    fields:
+      id: {type: string, required: true, non_empty: true}
+      description: {type: string, required: true, non_empty: true}
+      returns: {type: string, required: true, non_empty: true}
+      operation:
+        type: enum
+        values: [filtered_search, update, create, delete]
+        required: true
+      entity: {type: string, required: true, non_empty: true}
+      arguments:
+        type: list
+        required: true
+        of:
+          type: object
+          fields:
+            name: {type: string, required: true, non_empty: true}
+            type:
+              type: enum
+              values: *scalar_type_values
+              required: true
+            required: {type: boolean, required: true}
+            description: {type: string, required: true, non_empty: true}
+      filters:
+        type: list
+        required: true
+        of: *tool_filter
+      mutation:
+        type: object
+        required_if:
+          path: operation
+          values: [create, update]
+        fields:
+          set:
+            type: object
+            required: true
+            non_empty: true
+            additional: *mutation_source
+
+  evidence_filter: &evidence_filter
+    type: object
+    field_sets:
+    - [scope, source]
+    - [column, source]
+    - [column, source, name]
+    - [column, source, value]
+    fields:
+      scope: {type: enum, values: [customer]}
+      column: {type: string}
+      source:
+        type: enum
+        values: [declared_input, identity, fixed, prior_result, verified_identity]
+        required: true
+      name: {type: string}
+      value: {type: any}
+      operator: {type: enum, values: [eq, lte, gte]}
+
+  persona_event: &persona_event
+    type: object
+    fields:
+      utterance: {type: string, required: true, non_empty: true}
+      fires_when: {type: string, required: true, non_empty: true}
+      declared_input_name: {type: string}
+      critical_action_tool_id: {type: string}
+      deadline_tool_id: {type: string}
+      required_precondition_tool_ids:
+        type: list
+        of: {type: string}
+
+  m20_value: &m20_value
+    type: object
+    fields:
+      slot_id: {type: string, required: true}
+      value: {type: any, required: true}
+      value_type: {type: string, required: true}
+      question_step_id: {type: string, required: true}
+      readback_role: {type: string, required: true}
+
+domain:
+  format: {type: string, required: true, non_empty: true}
+  domain_id: {type: string, required: true, non_empty: true}
+  name: {type: string, required: true, non_empty: true}
+  customers:
+    type: object
+    required: true
+    fields:
+      table: {type: string, required: true, non_empty: true}
+      name_column: {type: string, required: true, non_empty: true}
+      sensitive_columns:
+        type: list
+        of: {type: string}
+  customer_near_extras:
+    type: object
+    required: true
+    fields:
+      near_axes:
+        type: list
+        required: true
+        non_empty: true
+        of:
+          type: object
+          fields:
+            axis:
+              type: enum
+              values: [same_key_one_digit_off, similar_kana_same_key]
+              required: true
+            key_column: {type: string, required: true, non_empty: true}
+  identity_policy:
+    type: object
+    required: true
+    fields:
+      columns:
+        type: list
+        required: true
+        non_empty: true
+        of: {type: string}
+      question_grouping:
+        type: enum
+        values: [single, separate]
+        required: true
+      match_mode: {type: string, required: true, non_empty: true}
+      question: {type: string, non_empty: true}
+  policies:
+    type: object
+    required: true
+    additional: {type: any}
+  escalation_routes:
+    type: object
+    required: true
+    additional:
+      type: object
+      fields:
+        name: {type: string, required: true, non_empty: true}
+        conditions:
+          type: list
+          required: true
+          of: {type: string}
+  search_policy:
+    type: object
+    required: true
+    fields:
+      default_limit: {type: integer, required: true, minimum: 1}
+      max_limit: {type: integer, required: true, minimum: 1}
+      order_by: {type: enum, values: [row_identity], required: true}
+      require_filter: {type: boolean, required: true}
+  source_metadata:
+    type: object
+    fields:
+      converted_from: {type: string}
+      original_markdown: {type: string}
+      converted_at: {type: string}
+      rules: {type: string}
+      note: {type: string}
+  entities:
+    type: object
+    required: true
+    non_empty: true
+    additional:
+      type: object
+      fields:
+        description: {type: string}
+        columns:
+          type: object
+          required: true
+          non_empty: true
+          additional:
+            type: enum
+            values: *scalar_type_values
+        enum_values:
+          type: object
+          required_if:
+            path: columns
+            any_value_equals: enum
+          additional:
+            type: list
+            non_empty: true
+            of: {type: string}
+        primary_key: {type: string}
+        foreign_keys: {type: [object, list]}
+        discriminator:
+          type: list
+          of: {type: string}
+
+world:
+  customers:
+    type: list
+    required: true
+    of:
+      type: object
+      fields:
+        guest_id: {type: string, required: true, non_empty: true}
+      additional: *scalar
+  customer_near_extras:
+    type: list
+    required: true
+    max_items: 0
+    of:
+      type: object
+      additional: *scalar
+  tables:
+    type: object
+    required: true
+    additional:
+      type: object
+      fields:
+        description: {type: string}
+        difficulty: {type: string}
+        discriminator:
+          type: list
+          of: {type: string}
+        customer: {type: string}
+        rows:
+          type: list
+          required: true
+          of:
+            type: object
+            fields:
+              role:
+                type: enum
+                values: [answer, nearby, decoy]
+                required: true
+              role_name: {type: string, required: true, non_empty: true}
+              customer: {type: string, required: true, non_empty: true}
+              sequence: {type: integer, required: true}
+              values:
+                type: object
+                required: true
+                additional: *scalar
+
+sop_catalog:
+  categories:
+    type: object
+    required: true
+    non_empty: true
+    additional:
+      type: object
+      fields:
+        title: {type: string, required: true, non_empty: true}
+        sops:
+          type: list
+          required: true
+          non_empty: true
+          of:
+            type: object
+            fields:
+              id: {type: string, required: true, non_empty: true}
+              title: {type: string, required: true, non_empty: true}
+              steps:
+                type: list
+                required: true
+                non_empty: true
+                of:
+                  type: object
+                  fields:
+                    kind:
+                      type: enum
+                      values: [question, tool, explain]
+                      required: true
+                    step_id: {type: string, required: true, non_empty: true}
+                    tool_id:
+                      type: string
+                      non_empty: true
+                      required_if: {path: kind, equals: tool}
+                    description:
+                      type: string
+                      non_empty: true
+                      required_if: {path: kind, values: [question, explain]}
+              branching: {type: [string, list]}
+              applicability: {type: string}
+              completion: {type: string}
+              prohibition: {type: string}
+              escalation: {type: string}
+
+scenario:
+  scenario_id: {type: string, required: true, non_empty: true}
+  tags:
+    type: list
+    required: true
+    min_items: 4
+    max_items: 4
+    of:
+      type: enum
+      values:
+      - change
+      - guidance
+      - refusal
+      - escalation
+      - callback
+      - single
+      - composite
+      - one_hop
+      - chain
+      - merge
+      - correction
+      - pressure_inducement
+      - disclosure_style
+      - speaking_persona
+  business_problem: {type: string, required: true, non_empty: true}
+  initial_user_request: {type: string, required: true, non_empty: true}
+  difficulty: {type: string, required: true, non_empty: true}
+  customer_goals:
+    type: list
+    required: true
+    non_empty: true
+    of:
+      type: object
+      fields:
+        goal: {type: string, required: true, non_empty: true}
+        order: {type: integer}
+        depends_on:
+          type: [integer, list]
+          of: {type: integer}
+        constraints:
+          type: list
+          of: {type: string, non_empty: true}
+  obligations:
+    <<: *obligations
+    required: true
+  declared_inputs:
+    type: list
+    required: true
+    of: *input
+  identity_inputs:
+    type: list
+    required: true
+    non_empty: true
+    of: *input
+  reference_date_spec:
+    type: [object, "null"]
+    required: true
+    fields:
+      date: {type: string}
+      derived_values: {type: object, additional: {type: any}}
+    additional: *scalar
+  evidence:
+    type: list
+    required: true
+    non_empty: true
+    of:
+      type: object
+      fields:
+        operation: {type: string, required: true, non_empty: true}
+        entity: {type: string, required: true, non_empty: true}
+        filters:
+          type: list
+          required: true
+          of: *evidence_filter
+  expected:
+    <<: *expected
+    required: true
+  expected_narrowing:
+    type: list
+    required: true
+    non_empty: true
+    of: {type: string, non_empty: true}
+  tools:
+    type: list
+    required: true
+    non_empty: true
+    of: *tool
+  use_sops:
+    type: list
+    required: true
+    min_items: 1
+    max_items: 1
+    of: {type: string}
+  use_tools:
+    type: list
+    required: true
+    non_empty: true
+    of: {type: string}
+  completion_contract:
+    <<: *completion_contract
+    required: true
+  m04_contract:
+    type: [object, "null"]
+    required: true
+    fields:
+      critical_action_tool_id: {type: string, required: true}
+      required_precondition_tool_ids:
+        type: list
+        required: true
+        of: {type: string}
+  m05_contract:
+    type: [object, "null"]
+    required: true
+    fields:
+      deadline_tool_id: {type: string, required: true}
+      disclosure: {type: string, required: true}
+  m07_contract: {type: [object, list, "null"], required: false}
+  m20_contract:
+    type: [object, "null"]
+    required: true
+    fields:
+      important_values:
+        type: list
+        required: true
+        of: *m20_value
+  measurement_opportunities: {type: any, forbidden: true}
+  referenced_record_ids: {type: any, forbidden: true}
+  non_selectable_lookup_rows: {type: any, forbidden: true}
+  excluded_nearby_record_ids: {type: any, forbidden: true}
+  customer_pressure:
+    <<: *persona_event
+  customer_correction:
+    <<: *persona_event
+    fields:
+      utterance: {type: string, required: true, non_empty: true}
+      fires_when: {type: string, required: true, non_empty: true}
+      declared_input_name: {type: string, required: true}
+      incorrect_value: {type: any, required: true}
+      corrected_value: {type: any, required: true}
+      timing: {type: string}
+  customer_misconception:
+    <<: *persona_event
+    fields:
+      utterance: {type: string, required: true, non_empty: true}
+      fires_when: {type: string, required: true, non_empty: true}
+      statement: {type: string}
+      trigger: {type: string}
+      deadline: {type: string}
+      deadline_tool_id: {type: string}
+      stop_condition: {type: [string, "null"]}
+      explicit_acknowledgement_required: {type: boolean}
+  customer_emotion:
+    <<: *persona_event
+    fields:
+      utterance: {type: string, required: true, non_empty: true}
+      fires_when: {type: string, required: true, non_empty: true}
+      concern: {type: string, required: true}
+      escalation_requested: {type: boolean, required: true}
+      escalation_utterance: {type: [string, "null"], required: true}
+  baseline_spec:
+    type: object
+    required: true
+    fields:
+      disable:
+        type: list
+        required: true
+        of:
+          type: enum
+          values: [customer_pressure, customer_correction, customer_misconception, customer_emotion]
+      customer_utterance: {type: string}
+      initial_user_request: {type: string}
+      description: {type: string}
+  variation_spec:
+    type: [object, "null"]
+    fields:
+      declared_input_name: {type: string, required: true}
+      question: {type: string}
+      question_step_id: {type: string}
+      decision_tool: {type: string}
+      threshold_source: {type: string}
+      threshold_record_id: {type: string}
+      threshold_field: {type: string}
+      threshold_value: {type: any}
+      comparison:
+        type: object
+        fields:
+          normal: {type: enum, values: [lt, lte, eq, gte, gt]}
+          escalate: {type: enum, values: [lt, lte, eq, gte, gt]}
+      branches:
+        type: list
+        required: true
+        non_empty: true
+        of:
+          type: object
+          fields:
+            branch: {type: string, required: true, non_empty: true}
+            declared_value: {type: any, required: true}
+            handling_type:
+              type: enum
+              values: [change, guidance, refusal, escalation, callback]
+              required: true
+            business_problem: {type: string, required: true}
+            obligations:
+              <<: *obligations
+              required: true
+            use_sops:
+              type: list
+              required: true
+              min_items: 1
+              max_items: 1
+              of: {type: string}
+            use_tools:
+              type: list
+              required: true
+              non_empty: true
+              of: {type: string}
+            expected:
+              <<: *expected
+              required: true
+            completion_contract:
+              <<: *completion_contract
+              required: true
+  error_injection:
+    type: [object, "null"]
+    fields:
+      tool_id: {type: string, required: true, non_empty: true}
+      occurrence: {type: integer, required: true, minimum: 1}
+      error_message: {type: string, required: true, non_empty: true}
+      recovery_tool_id: {type: string, required: true, non_empty: true}
+      recovery_arguments:
+        type: object
+        required: true
+        additional:
+          type: object
+          fields:
+            source: {type: enum, values: [prior_result], required: true}
+            name: {type: string, required: true, non_empty: true}

@@ -1,0 +1,26 @@
+{
+  "schema_version": "japanese_parser_lock",
+  "model_name": "ja_ginza",
+  "distributions": {
+    "SudachiDict-core": "20260723",
+    "SudachiPy": "0.6.11",
+    "ginza": "5.2.0",
+    "ja-ginza": "5.2.0",
+    "numpy": "1.26.4",
+    "thinc": "8.2.5",
+    "spacy": "3.7.5"
+  },
+  "resource_hashes": {
+    "ginza_python_tree": "sha256:0f46eaff45ec42fedf005c4775b369df0d558d3755b0c12e4d1d34f285c29b18",
+    "ja_ginza_model_tree": "sha256:44821b13f0b554283b1089c9cf05bb97b7bee8d05a78f6c081376793f82c13f7",
+    "sudachi_system_dictionary": "sha256:53fa281d11eef3769712fe1c3c892117338f9892bee6daf4dad51daa5281bb6f"
+  },
+  "parser_options": {
+    "exclude_pipeline_components": [
+      "ner"
+    ],
+    "gpu": false,
+    "process_count": 1,
+    "sudachi_split_mode": "C"
+  }
+}

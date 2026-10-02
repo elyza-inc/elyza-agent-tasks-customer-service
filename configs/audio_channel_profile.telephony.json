@@ -1,0 +1,37 @@
+{
+  "selected_profile": {
+    "profile_id": "telephony-pcm16-mono-8khz",
+    "response_latency_max_ms": 3000.0,
+    "clock_uncertainty_max_ms": 100.0,
+    "required_facets": [
+      "decode_format",
+      "rms_peak",
+      "clipping",
+      "flat_top",
+      "dropout",
+      "bandwidth",
+      "dc",
+      "continuity"
+    ],
+    "inapplicable_facets": {
+      "snr": "telephony_channel_has_no_defined_noise_reference_range",
+      "active_level": "telephony_channel_has_no_verified_P56_observation_range"
+    },
+    "sample_rate_hz": [8000],
+    "channels": [1],
+    "sample_width_bits": [16],
+    "rms_dbfs_min": -50.0,
+    "rms_dbfs_max": -3.0,
+    "peak_dbfs_max": 0.0,
+    "clip_ratio_max": 0.01,
+    "flat_top_max_ms": 20.0,
+    "near_zero_abs_max": 0.00001,
+    "dropout_max_ms": 1500.0,
+    "snr_min_db": 0.0,
+    "rolloff_min_hz": 300.0,
+    "rolloff_max_hz": 3600.0,
+    "dc_max_dbfs": -30.0,
+    "active_level_dbov_min": -50.0,
+    "active_level_dbov_max": -3.0
+  }
+}

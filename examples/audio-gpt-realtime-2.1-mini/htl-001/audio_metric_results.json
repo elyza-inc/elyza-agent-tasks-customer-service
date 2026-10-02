@@ -1,0 +1,552 @@
+{
+  "schema_version": "audio_metric_results",
+  "run_id": "htl-001-f127786c4492425480324e392f1c28fc",
+  "metrics": {
+    "M20": {
+      "metric_id": "M20",
+      "status": "failed",
+      "passed": false,
+      "units": [
+        {
+          "unit_id": "phone_number",
+          "status": "failed",
+          "passed": false,
+          "diagnostics": {
+            "evidence_count": 0
+          }
+        }
+      ],
+      "contract_source": "scenario.contracts.m20.important_values"
+    },
+    "M21": {
+      "metric_id": "M21",
+      "status": "failed",
+      "passed": false,
+      "reason": "one_or_more_units_failed",
+      "coverage": {
+        "total": 5,
+        "applicable": 5,
+        "measurable": 5,
+        "passed": 0,
+        "failed": 5,
+        "N/A": 0,
+        "N/M": 0
+      },
+      "units": [
+        {
+          "unit_id": "materialized-response-runtime:8:audio:1",
+          "status": "failed",
+          "passed": false,
+          "reason": "latency_interval_exceeds_maximum",
+          "diagnostics": {
+            "latency_kind": "response",
+            "latency_ms": 11615.505292,
+            "uncertainty_ms": 0.0,
+            "threshold_ms": 3000.0
+          }
+        },
+        {
+          "unit_id": "materialized-response-runtime:12:audio:1",
+          "status": "failed",
+          "passed": false,
+          "reason": "latency_interval_exceeds_maximum",
+          "diagnostics": {
+            "latency_kind": "response",
+            "latency_ms": 7822.409,
+            "uncertainty_ms": 0.0,
+            "threshold_ms": 3000.0
+          }
+        },
+        {
+          "unit_id": "materialized-response-runtime:24:audio:1",
+          "status": "failed",
+          "passed": false,
+          "reason": "latency_interval_exceeds_maximum",
+          "diagnostics": {
+            "latency_kind": "response",
+            "latency_ms": 13528.830417,
+            "uncertainty_ms": 0.0,
+            "threshold_ms": 3000.0
+          }
+        },
+        {
+          "unit_id": "materialized-response-runtime:26:audio:1",
+          "status": "failed",
+          "passed": false,
+          "reason": "latency_interval_exceeds_maximum",
+          "diagnostics": {
+            "latency_kind": "response",
+            "latency_ms": 10402.955875,
+            "uncertainty_ms": 0.0,
+            "threshold_ms": 3000.0
+          }
+        },
+        {
+          "unit_id": "materialized-response-runtime:28:audio:1",
+          "status": "failed",
+          "passed": false,
+          "reason": "latency_interval_exceeds_maximum",
+          "diagnostics": {
+            "latency_kind": "response",
+            "latency_ms": 7336.369958,
+            "uncertainty_ms": 0.0,
+            "threshold_ms": 3000.0
+          }
+        }
+      ]
+    },
+    "M22": {
+      "metric_id": "M22",
+      "status": "N/A",
+      "passed": null,
+      "units": []
+    },
+    "M23": {
+      "metric_id": "M23",
+      "status": "passed",
+      "passed": true,
+      "reason": "all_applicable_measurable_units_passed",
+      "coverage": {
+        "total": 5,
+        "applicable": 5,
+        "measurable": 5,
+        "passed": 5,
+        "failed": 0,
+        "N/A": 0,
+        "N/M": 0
+      },
+      "units": [
+        {
+          "unit_id": "materialized-quality-1",
+          "status": "passed",
+          "passed": true,
+          "reason": "all_required_signal_facets_passed",
+          "diagnostics": {
+            "facets": {
+              "decode_format": {
+                "applicable": true,
+                "measurable": true,
+                "status": "passed",
+                "reason": "format_matches_channel_profile"
+              },
+              "rms_peak": {
+                "applicable": true,
+                "measurable": true,
+                "status": "passed",
+                "reason": "RMS_and_peak_within_profile"
+              },
+              "clipping": {
+                "applicable": true,
+                "measurable": true,
+                "status": "passed",
+                "reason": "clip_ratio_within_profile"
+              },
+              "flat_top": {
+                "applicable": true,
+                "measurable": true,
+                "status": "passed",
+                "reason": "same_sign_flat_top_within_profile"
+              },
+              "dropout": {
+                "applicable": true,
+                "measurable": true,
+                "status": "passed",
+                "reason": "speech_dropout_within_profile"
+              },
+              "snr": {
+                "applicable": false,
+                "measurable": false,
+                "status": "N/A",
+                "reason": "telephony_channel_has_no_defined_noise_reference_range"
+              },
+              "bandwidth": {
+                "applicable": true,
+                "measurable": true,
+                "status": "passed",
+                "reason": "spectral_rolloff_within_channel_profile"
+              },
+              "dc": {
+                "applicable": true,
+                "measurable": true,
+                "status": "passed",
+                "reason": "DC_level_within_profile"
+              },
+              "continuity": {
+                "applicable": true,
+                "measurable": true,
+                "status": "passed",
+                "reason": "chunk_sequence_is_complete"
+              },
+              "active_level": {
+                "applicable": false,
+                "measurable": false,
+                "status": "N/A",
+                "reason": "telephony_channel_has_no_verified_P56_observation_range"
+              }
+            },
+            "observations": {
+              "rms_dbfs": -21.39157552180825,
+              "peak_dbfs": -1.308329747343785,
+              "crest_factor_db": 20.083245774464466,
+              "clip_ratio": 0.0,
+              "flat_top_max_ms": 0.0,
+              "dropout_max_ms": 244.375,
+              "snr_db": null,
+              "spectral_rolloff_95_hz": 1368.9380530973451,
+              "dc_dbfs": -115.35107372053028,
+              "p56_active_level_dbov": null
+            }
+          }
+        },
+        {
+          "unit_id": "materialized-quality-2",
+          "status": "passed",
+          "passed": true,
+          "reason": "all_required_signal_facets_passed",
+          "diagnostics": {
+            "facets": {
+              "decode_format": {
+                "applicable": true,
+                "measurable": true,
+                "status": "passed",
+                "reason": "format_matches_channel_profile"
+              },
+              "rms_peak": {
+                "applicable": true,
+                "measurable": true,
+                "status": "passed",
+                "reason": "RMS_and_peak_within_profile"
+              },
+              "clipping": {
+                "applicable": true,
+                "measurable": true,
+                "status": "passed",
+                "reason": "clip_ratio_within_profile"
+              },
+              "flat_top": {
+                "applicable": true,
+                "measurable": true,
+                "status": "passed",
+                "reason": "same_sign_flat_top_within_profile"
+              },
+              "dropout": {
+                "applicable": true,
+                "measurable": true,
+                "status": "passed",
+                "reason": "speech_dropout_within_profile"
+              },
+              "snr": {
+                "applicable": false,
+                "measurable": false,
+                "status": "N/A",
+                "reason": "telephony_channel_has_no_defined_noise_reference_range"
+              },
+              "bandwidth": {
+                "applicable": true,
+                "measurable": true,
+                "status": "passed",
+                "reason": "spectral_rolloff_within_channel_profile"
+              },
+              "dc": {
+                "applicable": true,
+                "measurable": true,
+                "status": "passed",
+                "reason": "DC_level_within_profile"
+              },
+              "continuity": {
+                "applicable": true,
+                "measurable": true,
+                "status": "passed",
+                "reason": "chunk_sequence_is_complete"
+              },
+              "active_level": {
+                "applicable": false,
+                "measurable": false,
+                "status": "N/A",
+                "reason": "telephony_channel_has_no_verified_P56_observation_range"
+              }
+            },
+            "observations": {
+              "rms_dbfs": -21.290988739921236,
+              "peak_dbfs": -0.7474856366719519,
+              "crest_factor_db": 20.543503103249282,
+              "clip_ratio": 0.0,
+              "flat_top_max_ms": 0.0,
+              "dropout_max_ms": 753.375,
+              "snr_db": null,
+              "spectral_rolloff_95_hz": 1354.4485294117646,
+              "dc_dbfs": -116.84854665708833,
+              "p56_active_level_dbov": null
+            }
+          }
+        },
+        {
+          "unit_id": "materialized-quality-3",
+          "status": "passed",
+          "passed": true,
+          "reason": "all_required_signal_facets_passed",
+          "diagnostics": {
+            "facets": {
+              "decode_format": {
+                "applicable": true,
+                "measurable": true,
+                "status": "passed",
+                "reason": "format_matches_channel_profile"
+              },
+              "rms_peak": {
+                "applicable": true,
+                "measurable": true,
+                "status": "passed",
+                "reason": "RMS_and_peak_within_profile"
+              },
+              "clipping": {
+                "applicable": true,
+                "measurable": true,
+                "status": "passed",
+                "reason": "clip_ratio_within_profile"
+              },
+              "flat_top": {
+                "applicable": true,
+                "measurable": true,
+                "status": "passed",
+                "reason": "same_sign_flat_top_within_profile"
+              },
+              "dropout": {
+                "applicable": true,
+                "measurable": true,
+                "status": "passed",
+                "reason": "speech_dropout_within_profile"
+              },
+              "snr": {
+                "applicable": false,
+                "measurable": false,
+                "status": "N/A",
+                "reason": "telephony_channel_has_no_defined_noise_reference_range"
+              },
+              "bandwidth": {
+                "applicable": true,
+                "measurable": true,
+                "status": "passed",
+                "reason": "spectral_rolloff_within_channel_profile"
+              },
+              "dc": {
+                "applicable": true,
+                "measurable": true,
+                "status": "passed",
+                "reason": "DC_level_within_profile"
+              },
+              "continuity": {
+                "applicable": true,
+                "measurable": true,
+                "status": "passed",
+                "reason": "chunk_sequence_is_complete"
+              },
+              "active_level": {
+                "applicable": false,
+                "measurable": false,
+                "status": "N/A",
+                "reason": "telephony_channel_has_no_verified_P56_observation_range"
+              }
+            },
+            "observations": {
+              "rms_dbfs": -20.777609339681938,
+              "peak_dbfs": -0.47728293921128656,
+              "crest_factor_db": 20.300326400470652,
+              "clip_ratio": 0.0,
+              "flat_top_max_ms": 0.0,
+              "dropout_max_ms": 39.75,
+              "snr_db": null,
+              "spectral_rolloff_95_hz": 1407.6773296244783,
+              "dc_dbfs": -114.09451744905294,
+              "p56_active_level_dbov": null
+            }
+          }
+        },
+        {
+          "unit_id": "materialized-quality-4",
+          "status": "passed",
+          "passed": true,
+          "reason": "all_required_signal_facets_passed",
+          "diagnostics": {
+            "facets": {
+              "decode_format": {
+                "applicable": true,
+                "measurable": true,
+                "status": "passed",
+                "reason": "format_matches_channel_profile"
+              },
+              "rms_peak": {
+                "applicable": true,
+                "measurable": true,
+                "status": "passed",
+                "reason": "RMS_and_peak_within_profile"
+              },
+              "clipping": {
+                "applicable": true,
+                "measurable": true,
+                "status": "passed",
+                "reason": "clip_ratio_within_profile"
+              },
+              "flat_top": {
+                "applicable": true,
+                "measurable": true,
+                "status": "passed",
+                "reason": "same_sign_flat_top_within_profile"
+              },
+              "dropout": {
+                "applicable": true,
+                "measurable": true,
+                "status": "passed",
+                "reason": "speech_dropout_within_profile"
+              },
+              "snr": {
+                "applicable": false,
+                "measurable": false,
+                "status": "N/A",
+                "reason": "telephony_channel_has_no_defined_noise_reference_range"
+              },
+              "bandwidth": {
+                "applicable": true,
+                "measurable": true,
+                "status": "passed",
+                "reason": "spectral_rolloff_within_channel_profile"
+              },
+              "dc": {
+                "applicable": true,
+                "measurable": true,
+                "status": "passed",
+                "reason": "DC_level_within_profile"
+              },
+              "continuity": {
+                "applicable": true,
+                "measurable": true,
+                "status": "passed",
+                "reason": "chunk_sequence_is_complete"
+              },
+              "active_level": {
+                "applicable": false,
+                "measurable": false,
+                "status": "N/A",
+                "reason": "telephony_channel_has_no_verified_P56_observation_range"
+              }
+            },
+            "observations": {
+              "rms_dbfs": -22.025942905473638,
+              "peak_dbfs": -1.012354742194992,
+              "crest_factor_db": 21.013588163278644,
+              "clip_ratio": 0.0,
+              "flat_top_max_ms": 0.0,
+              "dropout_max_ms": 45.5,
+              "snr_db": null,
+              "spectral_rolloff_95_hz": 1436.2279511533243,
+              "dc_dbfs": -117.54178777927865,
+              "p56_active_level_dbov": null
+            }
+          }
+        },
+        {
+          "unit_id": "materialized-quality-5",
+          "status": "passed",
+          "passed": true,
+          "reason": "all_required_signal_facets_passed",
+          "diagnostics": {
+            "facets": {
+              "decode_format": {
+                "applicable": true,
+                "measurable": true,
+                "status": "passed",
+                "reason": "format_matches_channel_profile"
+              },
+              "rms_peak": {
+                "applicable": true,
+                "measurable": true,
+                "status": "passed",
+                "reason": "RMS_and_peak_within_profile"
+              },
+              "clipping": {
+                "applicable": true,
+                "measurable": true,
+                "status": "passed",
+                "reason": "clip_ratio_within_profile"
+              },
+              "flat_top": {
+                "applicable": true,
+                "measurable": true,
+                "status": "passed",
+                "reason": "same_sign_flat_top_within_profile"
+              },
+              "dropout": {
+                "applicable": true,
+                "measurable": true,
+                "status": "passed",
+                "reason": "speech_dropout_within_profile"
+              },
+              "snr": {
+                "applicable": false,
+                "measurable": false,
+                "status": "N/A",
+                "reason": "telephony_channel_has_no_defined_noise_reference_range"
+              },
+              "bandwidth": {
+                "applicable": true,
+                "measurable": true,
+                "status": "passed",
+                "reason": "spectral_rolloff_within_channel_profile"
+              },
+              "dc": {
+                "applicable": true,
+                "measurable": true,
+                "status": "passed",
+                "reason": "DC_level_within_profile"
+              },
+              "continuity": {
+                "applicable": true,
+                "measurable": true,
+                "status": "passed",
+                "reason": "chunk_sequence_is_complete"
+              },
+              "active_level": {
+                "applicable": false,
+                "measurable": false,
+                "status": "N/A",
+                "reason": "telephony_channel_has_no_verified_P56_observation_range"
+              }
+            },
+            "observations": {
+              "rms_dbfs": -22.199891113008263,
+              "peak_dbfs": -1.7696694465928609,
+              "crest_factor_db": 20.430221666415402,
+              "clip_ratio": 0.0,
+              "flat_top_max_ms": 0.0,
+              "dropout_max_ms": 194.375,
+              "snr_db": null,
+              "spectral_rolloff_95_hz": 1400.482897384306,
+              "dc_dbfs": -116.04168968945812,
+              "p56_active_level_dbov": null
+            }
+          }
+        }
+      ]
+    },
+    "M25": {
+      "metric_id": "M25",
+      "status": "N/A",
+      "passed": null,
+      "units": [],
+      "accuracy": null,
+      "observation": {
+        "opportunity_count": 0,
+        "target_value_count": 1,
+        "rate": 0.0
+      },
+      "observation_rate": 0.0
+    },
+    "M26": {
+      "metric_id": "M26",
+      "status": "N/A",
+      "passed": null,
+      "units": [],
+      "grounded_use_rate": null
+    }
+  }
+}

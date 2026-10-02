@@ -1,0 +1,27 @@
+{
+  "profiles": [
+    {
+      "profile": "whisper_api_a",
+      "endpoint": "https://api.openai.com:443",
+      "model": "whisper-1",
+      "api_key_env": "OPENAI_API_KEY",
+      "request_fields": {
+        "language": "ja",
+        "response_format": "json"
+      },
+      "timeout_sec": 300
+    },
+    {
+      "profile": "whisper_api_b",
+      "endpoint": "https://api.openai.com:443",
+      "model": "whisper-1",
+      "api_key_env": "OPENAI_API_KEY",
+      "request_fields": {
+        "language": "ja",
+        "response_format": "json",
+        "temperature": "0.2"
+      },
+      "timeout_sec": 300
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+name: Tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+          cache-dependency-glob: pyproject.toml
+      - run: uv venv -p 3.12
+      - run: uv pip install --python .venv/bin/python -e . pytest
+      - run: source .venv/bin/activate && python -m pytest tests -q --deselect tests/test_google_credentials.py
+        env:
+          CI_NO_NETWORK: "1"

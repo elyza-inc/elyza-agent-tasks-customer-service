@@ -1,0 +1,20 @@
+{
+  "schema_version": "ticket_conversation_question_templates",
+  "templates": [
+    {
+      "template_id": "refusal_reason_code",
+      "question_text": "オペレータは、{reason}を理由に断ると会話中に伝えたか。",
+      "required_parameters": ["reason"]
+    },
+    {
+      "template_id": "promise_callback",
+      "question_text": "オペレータは、{owner}から{channel}で折り返し、期限として{deadline}までに対応すると会話中に伝えたか。",
+      "required_parameters": ["owner", "channel", "deadline"]
+    },
+    {
+      "template_id": "answer_summary",
+      "question_text": "オペレータは、回答要約「{summary}」の内容を会話中に伝えたか。",
+      "required_parameters": ["summary"]
+    }
+  ]
+}

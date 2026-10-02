@@ -1,0 +1,28 @@
+ELYZA Agent Tasks: Customer Service
+Copyright 2026 ELYZA, Inc.
+
+This product is licensed under the Apache License, Version 2.0 (see LICENSE).
+
+Third-party components
+----------------------
+
+This repository does not bundle any third-party software or model files.
+The following components are installed separately as dependencies
+(see pyproject.toml) and are used by the M17 Japanese register rules:
+
+- GiNZA (ginza 5.2.0, ja-ginza 5.2.0) - MIT License
+  https://github.com/megagonlabs/ginza
+  The ja-ginza model lists the following training resources in its
+  meta.json. Users of the model should check these terms themselves:
+  - UD_Japanese-BCCWJ r2.8 - CC BY-NC-SA 4.0
+    https://github.com/UniversalDependencies/UD_Japanese-BCCWJ
+  - GSK2014-A (2019) - individually defined commercial license
+    https://www.gsk.or.jp/catalog/gsk2014-a/
+  - SudachiDict_core, chiVe - Apache License 2.0
+- SudachiPy 0.6.11, SudachiDict-core - Apache License 2.0
+  https://github.com/WorksApplications/SudachiPy
+- spaCy 3.7.5 - MIT License
+
+configs/japanese_register_rules.yaml is an original rule set written with
+reference to "Keigo no Shishin" (Council for Cultural Affairs, 2007); it
+contains no text reproduced from that document.
