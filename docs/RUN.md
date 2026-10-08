@@ -136,7 +136,7 @@ find .run/packages -maxdepth 1 -name '*.yaml' -type f | wc -l
 
 ## 集計する
 
-`--results-root` はいくつでも渡せます。次はテキストのbaselineとhardの結果をまとめ、指標別、カテゴリ別、ドメイン別の表を標準出力に出します。
+`--results-root` はいくつでも渡せます。次はテキストのbaselineとhardの結果をまとめ、指標別、評価カテゴリ別、ドメイン別の表を標準出力に出します。
 
 ```bash
 .venv/bin/python scripts/summarize_runs.py \
@@ -148,9 +148,9 @@ find .run/packages -maxdepth 1 -name '*.yaml' -type f | wc -l
 
 `--results-root` の下にある `<scenario_id>/<variant>/run_001/score.json` をたどって読みます。baselineとhardの両方を渡すと、同じシナリオどうしの差も出ます。
 
-カテゴリ表の「公開値」の列は、READMEの評価結果の表と同じ値です。baselineとhardの両方を渡したときに出ます。
+評価カテゴリの表の「公開値」の列は、READMEの評価結果の表と同じ値です。baselineとhardの両方を渡したときに出ます。
 
-| カテゴリ | 公開値 |
+| 評価カテゴリ | 公開値 |
 |---|---|
 | タスク遂行、SOP、ツール、応対記録 | baselineとhardの両方で満点だったシナリオの割合 |
 | 対話品質 | baselineの平均とhardの平均を足して2で割った値 |
@@ -194,7 +194,7 @@ find .run/packages -maxdepth 1 -name '*.yaml' -type f | wc -l
 
 ## 所要時間の目安(実測)
 
-1シナリオの平均の実行時間は、テキストが61秒(中央値59秒)、音声が112秒(中央値92秒)です。96シナリオを2条件で流すと、テキスト(6並列)で約35分、音声(4並列)で約1.5時間かかります。会話は平均でテキストが19往復、音声が13往復です。APIの費用は、評価対象モデル、顧客役(gpt-5.6-luna)、LLMジャッジの価格で決まります。まず `limit_scenarios` か1ドメインで小さく試すことを勧めます。
+1シナリオの実行時間は、テキストが約1分、音声が約2分です。96シナリオを2条件で流すと、テキスト(6並列)で約35分、音声(4並列)で約1.5時間かかります。会話はテキストで約20往復、音声で十数往復です。APIの費用は、評価対象モデル、顧客役(gpt-5.6-luna)、LLMジャッジの価格で決まります。まず `limit_scenarios` か1ドメインで小さく試すことを勧めます。
 
 ## ファイル名の決まり
 
