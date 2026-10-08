@@ -29,7 +29,7 @@ READMEの評価結果の表に載せたモデルは、次のどれかの方法�
 | Anthropic | claude-opus-5、claude-sonnet-5 | `https://api.anthropic.com` | `"operator_api_key_env":"ANTHROPIC_API_KEY"`、`"user_controller_endpoint":"https://api.openai.com"`、`"user_controller_api_key_env":"OPENAI_API_KEY"`、`"operator_prompt_cache":true`(任意) | `ANTHROPIC_API_KEY`、`OPENAI_API_KEY` |
 | Google Vertex AI | google/gemini-3.6-flashなど | `https://aiplatform.googleapis.com/v1beta1/projects/<プロジェクト>/locations/global/endpoints/openapi` | `"operator_api_key_env":"GOOGLE_ACCESS_TOKEN"`、`"user_controller_endpoint":"https://api.openai.com"`、`"user_controller_api_key_env":"OPENAI_API_KEY"` | `GOOGLE_ACCESS_TOKEN`、`OPENAI_API_KEY` |
 | OpenAI Realtime(音声) | gpt-realtime-2.1、gpt-realtime-2.1-mini | `https://api.openai.com` | `"operator_transport":"realtime"`、`"io_mode":"audio-audio"` | `OPENAI_API_KEY` |
-| Gemini Live(音声) | gemini-live-2.5-flash | `https://aiplatform.googleapis.com` | `"operator_transport":"gemini_live"`、`"io_mode":"audio-audio"`、`"operator_api_key_env":"GOOGLE_ACCESS_TOKEN"`、`"user_controller_endpoint":"https://api.openai.com"`、`"user_controller_api_key_env":"OPENAI_API_KEY"`。`api_model` は `projects/<プロジェクト>/locations/<リージョン>/publishers/google/models/gemini-live-2.5-flash` の形で書く | `GOOGLE_ACCESS_TOKEN`、`OPENAI_API_KEY` |
+| Gemini Live(音声) | gemini-3.8-live | `https://aiplatform.googleapis.com` | `"operator_transport":"gemini_live"`、`"io_mode":"audio-audio"`、`"operator_api_key_env":"GOOGLE_ACCESS_TOKEN"`、`"user_controller_endpoint":"https://api.openai.com"`、`"user_controller_api_key_env":"OPENAI_API_KEY"`。`api_model` は `projects/<プロジェクト>/locations/us-central1/publishers/google/models/gemini-3.8-live` の形で書く(公開値の評価時点では us-central1 でのみ利用可能) | `GOOGLE_ACCESS_TOKEN`、`OPENAI_API_KEY` |
 | OpenAI互換サーバ(自前ホスト) | Qwen3-Omniなど | `http://<ホスト>:<ポート>` | `"user_controller_endpoint":"https://api.openai.com"`、`"user_controller_api_key_env":"OPENAI_API_KEY"`。音声で評価するときは `"operator_transport":"chat_audio"`、`"io_mode":"audio-audio"` | `OPENAI_API_KEY`。サーバがキーを求めるときは、その環境変数を `"operator_api_key_env"` で指定 |
 
 顧客役の接続先 `user_controller_endpoint` は、指定しないと第2引数と同じになります。endpointが `https://api.openai.com` でない行(Anthropic、Google Vertex AI、Gemini Live、OpenAI互換サーバ)では、JSON設定に `"user_controller_endpoint":"https://api.openai.com"` も足してください。足さないと、顧客役のリクエストが評価対象モデルの接続先に送られて失敗します。顧客役のモデルは `user_controller_model`(既定は `gpt-5.6-luna`)で変えられます。
@@ -189,7 +189,6 @@ find .run/packages -maxdepth 1 -name '*.yaml' -type f | wc -l
 | `operator_reasoning` | なし | `operator_transport` が `responses` のときに、評価対象モデルへ渡す `reasoning` の設定 |
 | `request_extra_body` | なし | 評価対象モデルへのリクエストに足すフィールド |
 | `voice` | `Puck` | Gemini Liveの評価対象モデルの声 |
-| `post_call_model` | `google/gemini-3.6-flash` | Gemini Liveで通話後の応対記録を書くモデル。Live用のモデルは通話後の文字の処理に対応しないため、別のモデルを使う |
 
 ツールの引数がスキーマに合わないときと、応対記録が欠けたときは、ハーネスがモデルに直させます(それぞれ最大2回)。コンテキストの長さを超えたときは送り直します。回数と内容は `record.json` の `schema_repair_count`、`ticket_repair_count`、`context_length_retry` に残ります。
 

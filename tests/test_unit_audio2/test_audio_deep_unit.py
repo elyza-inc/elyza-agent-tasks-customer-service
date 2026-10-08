@@ -110,11 +110,11 @@ def test_backend_send_context_audio_text_and_chat_stubs(tmp_path: Path, monkeypa
     gemini_backend.send_user_text("hello")
     gemini_backend.submit_tool_result("c", "value")
     assert gemini_backend._audio_pending and gemini_sent[-1]["toolResponse"]["functionResponses"][0]["name"] == "tool"
-    gemini_backend._post_call_model, gemini_backend._post_call_url = "post", "http://post"
-    fake_io = types.ModuleType("elyza_agent_tasks_customer_service.evaluation.llm.llm_io")
-    fake_io.post_json = object()
-    fake_io.chat_with_context_retry = lambda *args, **kwargs: {"choices": []}
-    monkeypatch.setitem(sys.modules, fake_io.__name__, fake_io)
-    assert gemini_backend.chat_transport("", {"messages": [{"role": "user", "content": "x"}], "tools": []}, {}, 1) == {"choices": []}
+    # 通話後の応対記録は同じ Live セッションに structured output の関数呼び出しで書かせる。
+    gemini_backend.model = "live"
+    gemini_backend.request_response = lambda **_: {"audio_path": None, "message": {"content": "", "tool_calls": [
+        {"function": {"name": gemini.STRUCTURED_OUTPUT_TOOL_NAME, "arguments": '{"ticket_json": "{\\"a\\": 1}"}'}}]}}
+    result = gemini_backend.chat_transport("", {"messages": [{"role": "user", "content": "x"}], "tools": []}, {}, 1)
+    assert json.loads(result["choices"][0]["message"]["content"]) == {"a": 1}
 
 

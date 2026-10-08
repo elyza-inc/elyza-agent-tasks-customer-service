@@ -461,9 +461,6 @@ def run_package_eval(config: dict[str, Any], endpoint: str = "") -> bool:
                     operator_backend = GeminiLiveOperatorBackend(
                         **backend_arguments,
                         voice=str(config.get("voice") or "Puck"),
-                        post_call_model=str(
-                            config.get("post_call_model") or "google/gemini-3.6-flash"
-                        ),
                     )
                 elif realtime_transport:
                     operator_backend = RealtimeOperatorBackend(

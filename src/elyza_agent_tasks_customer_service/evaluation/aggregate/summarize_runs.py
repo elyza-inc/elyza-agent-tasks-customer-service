@@ -380,7 +380,8 @@ def main(argv: list[str] | None = None) -> int:
     print("\n".join(m11_subfacet_table(
         m11_subfacets.get("baseline", {}), m11_subfacets.get("hard", {})
     )))
-    print("値は走行失敗を0点に算入した合格率。エラー対処はエラー注入シナリオのみが対象。")
+    print("値は走行失敗を0点に算入した合格率。エラー対処は業務ツールがエラーを返したシナリオのみが対象"
+          "(意図的に入れたエラーのほか、モデルの操作で起きたエラーも含む)。")
     print()
     print("\n".join(category_table(base, hard)))
     if hard:
