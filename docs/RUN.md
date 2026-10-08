@@ -158,7 +158,7 @@ find .run/packages -maxdepth 1 -name '*.yaml' -type f | wc -l
 
 ## 主な設定キー
 
-`run_eval.py` の第1引数はJSON設定、第2引数は評価対象モデルのendpointです。主なキーは次のとおりです。READMEの評価結果は、上の例で指定したキー以外を既定値のまま実行したものです。
+`run_eval.py` の第1引数はJSON設定、第2引数は評価対象モデルのendpointです。主なキーは次のとおりです。READMEの評価結果は、上の例で指定したキーと[評価対象モデルごとの接続設定](#評価対象モデルごとの接続設定)の表のキー以外を、既定値のまま実行したものです。ただし `gemini-3.5-flash-lite` は `"request_extra_body":{"reasoning_effort":"medium"}` を指定しています。
 
 | キー | 既定値 | 意味 |
 |---|---|---|
