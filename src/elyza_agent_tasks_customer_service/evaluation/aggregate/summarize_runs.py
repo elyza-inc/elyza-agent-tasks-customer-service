@@ -135,6 +135,10 @@ def load_runs(roots: list[Path]) -> dict[str, dict]:
                 entry["tool_calls"] = sum(
                     1 for e in events if e.get("event_type") == "tool_call"
                 )
+            record_path = run_dir / "record.json"
+            if record_path.exists() and '"call_limit_reached"' in record_path.read_text(encoding="utf-8"):
+                # 上限で打ち切った通話は失敗ではなく採点されるが、走行結果は上限打ち切りに数える。
+                entry["outcome"] = "上限打ち切り"
             audio_path = run_dir / "audio_user" / "audio_metric_results.json"
             if audio_path.exists():
                 entry["audio"] = json.loads(audio_path.read_text(encoding="utf-8"))["metrics"]

@@ -1907,6 +1907,8 @@ def run_package_chat(
     correction_incorrect_value_spoken = False
     conversation_end_deferred_for_persona = False
     end_conversation = False
+    # 上限に達した通話は失敗にせず、その時点で打ち切ってここまでの記録で採点する。
+    call_limit: str | None = None
     fallback_parse = False
     tool_rounds = 0
     operator_silence_count = 0
@@ -2020,7 +2022,8 @@ def run_package_chat(
             if raw_calls and silence_reason is None:
                 tool_rounds += 1
                 if tool_rounds > max_tool_rounds:
-                    _stop(scenario_id, "runtime.max_tool_rounds", f"exceeded {max_tool_rounds}")
+                    call_limit = "max_tool_rounds"
+                    break
                 operator_messages.append(deepcopy(message))
                 provenance_events = deepcopy(events)
                 for raw_call in raw_calls:
@@ -2161,6 +2164,8 @@ def run_package_chat(
             conversation.append(operator_turn)
             break
 
+        if call_limit is not None:
+            break
         if persona_interrupt:
             customer_text = "\n".join(
                 _string(runtime.persona[name], "utterance", scenario_id, f"persona.{name}")
@@ -2251,8 +2256,8 @@ def run_package_chat(
                 content=customer_text,
             )
             break
-    if not end_conversation:
-        _stop(scenario_id, "runtime.max_turns", f"conversation did not end within {max_turns} turns")
+    if not end_conversation and call_limit is None:
+        call_limit = "max_turns"
 
     call_events = deepcopy(events)
     operator_ticket_artifact = None
@@ -2324,6 +2329,8 @@ def run_package_chat(
         record["correction_incorrect_value_spoken"] = correction_incorrect_value_spoken
     if conversation_end_deferred_for_persona:
         record["conversation_end_deferred_for_persona"] = True
+    if call_limit is not None:
+        record["call_limit_reached"] = call_limit
     if "operator_ticket_failure" in ticket_record:
         record["operator_ticket_failure"] = deepcopy(ticket_record["operator_ticket_failure"])
     scenario_output = run_output_dir(

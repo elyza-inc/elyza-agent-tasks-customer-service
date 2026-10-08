@@ -3,8 +3,6 @@
 from __future__ import annotations
 
 import json
-import sys
-import types
 import wave
 from pathlib import Path
 
@@ -110,11 +108,12 @@ def test_backend_send_context_audio_text_and_chat_stubs(tmp_path: Path, monkeypa
     gemini_backend.send_user_text("hello")
     gemini_backend.submit_tool_result("c", "value")
     assert gemini_backend._audio_pending and gemini_sent[-1]["toolResponse"]["functionResponses"][0]["name"] == "tool"
-    # 通話後の応対記録は同じ Live セッションに structured output の関数呼び出しで書かせる。
+    # 通話後の応対記録は同じ Live セッションへの指示で書かせ、関数呼び出しの引数で受け取る。
     gemini_backend.model = "live"
-    gemini_backend.request_response = lambda **_: {"audio_path": None, "message": {"content": "", "tool_calls": [
-        {"function": {"name": gemini.STRUCTURED_OUTPUT_TOOL_NAME, "arguments": '{"ticket_json": "{\\"a\\": 1}"}'}}]}}
-    result = gemini_backend.chat_transport("", {"messages": [{"role": "user", "content": "x"}], "tools": []}, {}, 1)
-    assert json.loads(result["choices"][0]["message"]["content"]) == {"a": 1}
+    gemini_backend.request_response = lambda *, force_instruction: {"audio_path": None, "message": {
+        "content": "", "tool_calls": [{"id": "t", "function": {
+            "name": gemini.STRUCTURED_OUTPUT_TOOL_NAME, "arguments": json.dumps({"ticket_json": '{"a": 1}'})}}]}}
+    assert gemini_backend.chat_transport("", {"messages": [{"role": "user", "content": "x"}], "response_format": {}}, {}, 1) == {
+        "model": "live", "choices": [{"message": {"role": "assistant", "content": '{"a": 1}'}}]}
 
 

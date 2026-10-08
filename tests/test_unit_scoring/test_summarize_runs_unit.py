@@ -75,6 +75,15 @@ def test_load_runs_and_subfacets_with_all_optional_artifacts(tmp_path):
     assert summary.load_m11_subfacets([tmp_path]) == {"baseline": {"actual-1": {"required_success": "pass"}}}
 
 
+def test_load_runs_counts_a_scored_cutoff_as_limit_outcome(tmp_path):
+    run = tmp_path / "case-1" / "hard" / "run_001"
+    run.mkdir(parents=True)
+    (run / "score.json").write_text('{"scenario_id":"case-1","metric_results":[{"metric_id":"M01","status":"fail"}]}')
+    (run / "record.json").write_text('{"status":"success","call_limit_reached":"max_turns"}')
+    entry = summary.load_runs([tmp_path])["hard"]["case-1"]
+    assert entry["outcome"] == "上限打ち切り" and entry["metrics"]["M01"] == (0.0, "fail")
+
+
 def test_load_runs_rejects_duplicate_scenario(tmp_path):
     for variant in ("baseline", "hard"):
         path = tmp_path / "same" / variant / "run_001"

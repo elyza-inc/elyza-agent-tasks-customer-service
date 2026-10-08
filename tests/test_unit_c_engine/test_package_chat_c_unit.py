@@ -129,15 +129,28 @@ def test_malformed_tool_calls_run_no_tool_and_count_as_silence(monkeypatch, tmp_
 
 
 def test_repeated_silence_still_ends_at_max_turns(monkeypatch, tmp_path) -> None:
-    """Silence uses ordinary turns, so the existing max_turns stop still applies."""
+    """Silence uses ordinary turns; at max_turns the call is cut off and scored, not failed."""
 
     empty = {"choices": [{"message": {"content": ""}}]}
-    try:
-        _run(tmp_path, [empty, _CUSTOMER_CONTINUE, empty, _CUSTOMER_CONTINUE], max_turns=2)
-    except runtime.PackageError as error:
-        assert "runtime.max_turns" in str(error)
-    else:
-        raise AssertionError("repeated silence did not reach max_turns")
+    record = _run(tmp_path, [empty, _CUSTOMER_CONTINUE, empty, _CUSTOMER_CONTINUE], max_turns=2)
+    assert record["status"] == "success"
+    assert record["call_limit_reached"] == "max_turns"
+    assert len(record["conversation"]) == 5
+
+
+def test_max_tool_rounds_cuts_the_call_without_running_the_extra_call(monkeypatch, tmp_path) -> None:
+    """The response over max_tool_rounds runs no tool; the call ends there and is scored."""
+
+    call = {"choices": [{"message": {"tool_calls": [
+        {"id": "call-1", "function": {"name": "search", "arguments": '{"key":"one"}'}},
+    ]}}]}
+    record = _run(tmp_path, [call, call, call], max_turns=2)
+    assert record["status"] == "success"
+    assert record["call_limit_reached"] == "max_tool_rounds"
+    assert len(record["tool_calls"]) == 2
+    assert "call_limit_reached" not in _run(tmp_path, [
+        {"choices": [{"message": {"content": "承知しました。"}}]}, _CUSTOMER_END,
+    ], max_turns=1)
 
 
 def _pressure_package() -> dict:
